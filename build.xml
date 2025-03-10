@@ -1,0 +1,94 @@
+<project>
+
+    <property name="src" location="src"/>
+    <property name="lib" location="lib"/>
+    <property name="resource" location="resource"/>
+    <property name="build" location="build"/>
+    <property name="dist" location="dist"/>
+
+    <property name="jarfile"        value="mars.jar"/>
+    <property name="app.name"       value="MARS"/>
+    <property name="app.version"    value="4.5"/>
+    <property name="app.icon"       value="icons/mars.icns"/>
+    <property name="description"    value="MIPS Assembler and Runtime Simulator"/>
+    <property name="copyright"      value="2003-2014, Pete Sanderson and Kenneth Vollmar"/>
+    <property name="license"        value="LICENSE.txt"/>
+    <property name="about.url"      value="https://computerscience.missouristate.edu/mars-mips-simulator.htm"/>
+
+    <target name="init">
+        <mkdir dir="${build}"/>
+    </target>
+
+    <target name="compile" depends="init">
+        <javac srcdir="${src}" destdir="${build}" includeantruntime="false">
+            <classpath>
+                <fileset dir="${lib}">
+                    <include name="**/*.jar" />
+                </fileset>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="dist" depends="compile">
+        <mkdir dir="${dist}"/>
+        <jar destfile="${dist}/${jarfile}" >
+            <manifest >
+                <attribute name="Main-Class" value="marsapp.Mars"/>
+                <attribute name="Built-by" value="Ricardo Fonseca @ ISCTE-IUL"/>
+            </manifest>
+            <fileset dir="${build}" includes="**/*.class"/>            
+            <fileset dir="${resource}" />
+            <zipgroupfileset dir="${lib}" includes="**/*.jar"/>
+        </jar>
+    </target>
+
+
+    <target name="clean">
+        <delete dir="${build}"/>
+        <delete dir="${dist}"/>
+    </target>
+
+    <target name="run" depends="dist" description="run application">
+        <java jar="${dist}/${jarfile}" fork="true">
+        <jvmarg value="-Xdock:icon=${app.icon}"/>
+        <jvmarg value="-Dcom.apple.mrj.application.apple.menu.about.name=${app.name}"/>
+        </java>
+    </target>
+
+    <target name="app-image" depends="dist" description="build Mac OS X .app">
+        <exec executable="jpackage">
+        <arg value="--input"/>              <arg value="${dist}"/>
+        <arg value="--main-jar"/>           <arg value="${jarfile}" />
+        <arg value="--name"/>               <arg value="${app.name}" />
+        <arg value="--app-version"/>        <arg value="${app.version}" />
+        <arg value="--description"/>        <arg value="${description}" />
+        <arg value="--copyright"/>          <arg value="${copyright}"  />
+        <arg value="--icon"/>               <arg value="${app.icon}" />
+        <arg value="--add-modules"/>        <arg value="java.base,java.desktop,java.prefs" />
+        <arg value="--jlink-options"/>      <arg value="--strip-native-commands --strip-debug --no-man-pages --no-header-files --compress zip-9" />
+
+        <arg value="--type"/>               <arg value="app-image"/>
+        </exec>
+    </target>
+
+    <target name="dmg" depends="dist" description="build .dmg for distribution">
+        <exec executable="jpackage">
+        <arg value="--input"/>              <arg value="${dist}"/>
+        <arg value="--main-jar"/>           <arg value="${jarfile}" />
+        <arg value="--name"/>               <arg value="${app.name}" />
+        <arg value="--app-version"/>        <arg value="${app.version}" />
+        <arg value="--description"/>        <arg value="${description}" />
+        <arg value="--copyright"/>          <arg value="${copyright}"  />
+        <arg value="--icon"/>               <arg value="${app.icon}" />
+        <arg value="--about-url"/>          <arg value="${about.url}"/>
+        <arg value="--license-file"/>       <arg value="${license}"  />
+        <arg value="--add-modules"/>        <arg value="java.base,java.desktop,java.prefs" />
+        <arg value="--jlink-options"/>      <arg value="--strip-native-commands --strip-debug --no-man-pages --no-header-files --compress zip-9" />
+
+        <arg value="--type"/>               <arg value="dmg"/>
+        <arg value="--mac-dmg-content"/>    <arg value="extra/Examples"/>
+        <arg value="--mac-dmg-content"/>    <arg value="extra/MIPS-Reference-Card.pdf" />
+        </exec>
+    </target>
+
+</project>
