@@ -101,7 +101,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
        public static TokenTypes matchTokenType(String value)
       {
       
-         TokenTypes type = null;
+       // TokenTypes type = null;
 		 // If it starts with single quote ('), it is a mal-formed character literal
 		 // because a well-formed character literal was converted to string-ified 
 		 // integer before getting here...

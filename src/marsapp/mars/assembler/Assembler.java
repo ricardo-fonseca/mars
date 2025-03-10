@@ -56,14 +56,14 @@
  **/
 
    public class Assembler {
-      private ArrayList machineList;
+      private ArrayList<ProgramStatement> machineList;
       private ErrorList errors;
       private boolean inDataSegment; // status maintained by parser
       private boolean inMacroSegment; // status maintained by parser, true if in
    								// macro definition segment
       private int externAddress;
       private boolean autoAlign;
-      private Directives currentDirective;
+      // private Directives currentDirective;
       private Directives dataDirective;
       private MIPSprogram fileCurrentlyBeingAssembled;
       private TokenList globalDeclarationList;
@@ -89,7 +89,7 @@
     * 
     * @see ProgramStatement
     **/
-      public ArrayList assemble(MIPSprogram p, boolean extendedAssemblerEnabled)
+      public ArrayList<ProgramStatement> assemble(MIPSprogram p, boolean extendedAssemblerEnabled)
        	throws ProcessingException {
          return assemble(p, extendedAssemblerEnabled, false);
       }
@@ -116,9 +116,9 @@
     * 
     * @see ProgramStatement
     **/
-      public ArrayList assemble(MIPSprogram p, boolean extendedAssemblerEnabled,
+      public ArrayList<ProgramStatement> assemble(MIPSprogram p, boolean extendedAssemblerEnabled,
        	boolean warningsAreErrors) throws ProcessingException {
-         ArrayList programFiles = new ArrayList();
+         ArrayList<MIPSprogram> programFiles = new ArrayList<MIPSprogram>();
          programFiles.add(p);
          return this.assemble(programFiles, extendedAssemblerEnabled, warningsAreErrors);
       }
@@ -151,7 +151,7 @@
     * 
     * @see ProgramStatement
     **/
-      public ArrayList assemble(ArrayList tokenizedProgramFiles, boolean extendedAssemblerEnabled)
+      public ArrayList<ProgramStatement> assemble(ArrayList<MIPSprogram> tokenizedProgramFiles, boolean extendedAssemblerEnabled)
        	throws ProcessingException {
          return assemble(tokenizedProgramFiles, extendedAssemblerEnabled, false);
       }
@@ -179,7 +179,7 @@
     * 
     * @see ProgramStatement
     **/
-      public ArrayList assemble(ArrayList tokenizedProgramFiles, boolean extendedAssemblerEnabled,
+      public ArrayList<ProgramStatement> assemble(ArrayList<MIPSprogram> tokenizedProgramFiles, boolean extendedAssemblerEnabled,
        	boolean warningsAreErrors) throws ProcessingException {
       	
          if (tokenizedProgramFiles == null || tokenizedProgramFiles.size() == 0)
@@ -193,7 +193,7 @@
          accumulatedDataSegmentForwardReferences = new DataSegmentForwardReferences();
          Globals.symbolTable.clear();
          Globals.memory.clear();
-         this.machineList = new ArrayList();
+         this.machineList = new ArrayList<ProgramStatement>();
          this.errors = new ErrorList(); 
          if (Globals.debug)
             System.out.println("Assembler first pass begins:");
@@ -223,10 +223,11 @@
          // tokenList is an ArrayList of TokenList objects, one per source line;
          // each ArrayList in tokenList consists of Token objects.
             ArrayList<SourceLine> sourceLineList = fileCurrentlyBeingAssembled.getSourceLineList();
-            ArrayList tokenList = fileCurrentlyBeingAssembled.getTokenList();
-            ArrayList parsedList = fileCurrentlyBeingAssembled.createParsedList();
+            ArrayList<TokenList> tokenList = fileCurrentlyBeingAssembled.getTokenList();
+            ArrayList<ProgramStatement>  parsedList = fileCurrentlyBeingAssembled.createParsedList();
          // each file keeps its own macro definitions
-            MacroPool macroPool = fileCurrentlyBeingAssembled.createMacroPool();
+            // MacroPool macroPool = fileCurrentlyBeingAssembled.createMacroPool();
+            fileCurrentlyBeingAssembled.createMacroPool();
          // FIRST PASS OF ASSEMBLER VERIFIES SYNTAX, GENERATES SYMBOL TABLE,
          // INITIALIZES DATA SEGMENT
             ArrayList<ProgramStatement> statements;
@@ -284,7 +285,7 @@
             if (errors.errorLimitExceeded())
                break;
             this.fileCurrentlyBeingAssembled = (MIPSprogram) tokenizedProgramFiles.get(fileIndex);
-            ArrayList parsedList = fileCurrentlyBeingAssembled.getParsedList();
+            ArrayList<ProgramStatement> parsedList = fileCurrentlyBeingAssembled.getParsedList();
             ProgramStatement statement;
             for (int i = 0; i < parsedList.size(); i++) {
                statement = (ProgramStatement) parsedList.get(i);
@@ -325,7 +326,7 @@
                
                // ////////////////////////////////////////////////////////////////////////////
                // If we are using compact memory config and there is a compact expansion, use it
-                  ArrayList templateList;
+                  ArrayList<String> templateList;
                   if (compactTranslationCanBeApplied(statement)) {
                      templateList = inst.getCompactBasicIntructionTemplateList();
                   } 
@@ -356,7 +357,7 @@
                   // statement, add to list.
                      TokenList newTokenList = new Tokenizer().tokenizeLine(sourceLine,
                         instruction, errors,false);
-                     ArrayList instrMatches = this.matchInstruction(newTokenList.get(0));
+                     ArrayList<Instruction> instrMatches = this.matchInstruction(newTokenList.get(0));
                      Instruction instr = OperandFormat.bestOperandMatch(newTokenList,
                         instrMatches);
                   // Only first generated instruction is linked to original source
@@ -418,7 +419,7 @@
    // //////////////////////////////////////////////////////////////////////
    // Will check for duplicate text addresses, which can happen inadvertantly when using
    // operand on .text directive. Will generate error message for each one that occurs.
-      private void catchDuplicateAddresses(ArrayList instructions, ErrorList errors) {
+      private void catchDuplicateAddresses(ArrayList<ProgramStatement> instructions, ErrorList errors) {
          for (int i = 0; i < instructions.size() - 1; i++) {
             ProgramStatement ps1 = (ProgramStatement) instructions.get(i);
             ProgramStatement ps2 = (ProgramStatement) instructions.get(i + 1);
@@ -579,7 +580,7 @@
       // is not
       // yet implemented.
          if (!this.inDataSegment) {
-            ArrayList instrMatches = this.matchInstruction(token);
+            ArrayList<Instruction> instrMatches = this.matchInstruction(token);
             if (instrMatches == null)
                return ret;
          // OK, we've got an operator match, let's check the operands.
@@ -940,7 +941,7 @@
    // //////////////////////////////////////////////////////////////////////////////////
    // Given token, find the corresponding Instruction object. If token was not
    // recognized as OPERATOR, there is a problem.
-      private ArrayList matchInstruction(Token token) { 
+      private ArrayList<Instruction> matchInstruction(Token token) { 
          if (token.getType() != TokenTypes.OPERATOR) {
             if (token.getSourceMIPSprogram().getLocalMacroPool()
             	.matchesAnyMacroName(token.getValue()))
@@ -953,7 +954,7 @@
                   + "\" is not a recognized operator"));
             return null;
          }
-         ArrayList inst = Globals.instructionSet.matchOperator(token.getValue());
+         ArrayList<Instruction> inst = Globals.instructionSet.matchOperator(token.getValue());
          if (inst == null) { // This should NEVER happen...
             this.errors.add(new ErrorMessage(token.getSourceMIPSprogram(), token.getSourceLine(),
                token.getStartPos(), "Internal Assembler error: \"" + token.getValue()
@@ -1348,7 +1349,9 @@
    // ProgramStatements.
    // Sorting is based on unsigned integer value of
    // ProgramStatement.getAddress()
-      private class ProgramStatementComparator implements Comparator {
+
+/*
+   private class ProgramStatementComparator implements Comparator {
       // Will be used to sort the collection. Unsigned int compare, because
       // all kernel 32-bit
       // addresses have 1 in high order bit, which makes the int negative.
@@ -1370,7 +1373,15 @@
             return this == obj;
          }
       }
-   
+*/
+   private class ProgramStatementComparator implements Comparator<ProgramStatement> {
+      public int compare( ProgramStatement obj1, ProgramStatement obj2) {
+         int addr1 = obj1.getAddress();
+         int addr2 = obj2.getAddress();
+         return (addr1 < 0 && addr2 >= 0 || addr1 >= 0 && addr2 < 0) ? addr2 : addr1 - addr2;
+      }
+   }
+      
    // ///////////////////////////////////////////////////////////////////////////////////
    // Private class to simultaneously track addresses in both user and kernel
    // address spaces.
@@ -1427,10 +1438,10 @@
    // the integer directives: .word, .half, .byte)
    // - the label's token. Normally need only the name but error message needs more.
       private class DataSegmentForwardReferences {
-         private ArrayList forwardReferenceList;
+         private ArrayList<DataSegmentForwardReference> forwardReferenceList;
       
          private DataSegmentForwardReferences() {
-            forwardReferenceList = new ArrayList();
+            forwardReferenceList = new ArrayList<DataSegmentForwardReference>();
          }
       
          private int size() {

@@ -50,6 +50,19 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          super(name, icon, descrip, mnemonic, accel, gui);
          Globals.getGui().getMainPane().getExecutePane().getTextSegmentWindow().registerTableModelListener(this);
       }
+
+      public RunClearBreakpointsAction(VenusUI gui) {
+         super(
+            "Clear Breakpoints", null, 
+            "Clear all breakpoints in the text segment window", 
+            Integer.valueOf(KeyEvent.VK_K),
+            null,
+            gui
+         );
+
+         gui.getMainPane().getExecutePane().getTextSegmentWindow().registerTableModelListener(this);  
+      }  
+
    	 /**
 		  *  When this option is selected, tell text segment window to clear breakpoints in its table model.
 		  */

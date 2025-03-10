@@ -45,6 +45,19 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          super(name, icon, descrip, mnemonic, accel, gui);
       }
    
+   public FilePrintAction( VenusUI gui ) {
+      super(
+         "Print ...",
+         gui.multiResolutionIcon("Print"),
+         "Print the current file", 
+         Integer.valueOf(KeyEvent.VK_P),
+         KeyStroke.getKeyStroke( KeyEvent.VK_P, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), 
+         gui
+      );
+   }
+
+// Compare this snippet from src/marsapp/mars/venus/FilePrintPreviewAction.java:
+   
 	/** Uses the HardcopyWriter class developed by David Flanagan for the book
 	 * "Java Examples in a Nutshell".  It will do basic printing of multipage
 	 * text documents.  It displays a print dialog but does not act on any

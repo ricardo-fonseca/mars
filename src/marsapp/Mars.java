@@ -34,11 +34,11 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * @version March 2006
  **/
 
-   package marsapp;
+package marsapp;
 
-    public class Mars {
-       public static void main(String[] args) {
-         new mars.MarsLaunch(args);
-      }
-   } 
+   public class Mars {
+      public static void main(String[] args) {
+      new mars.MarsLaunch(args);
+   }
+} 
 

@@ -1,10 +1,10 @@
-   package mars.venus;
-   import mars.mips.hardware.*;
-   import java.awt.*;
-   import java.awt.event.*;
-   import javax.swing.*;
-	
-	/*
+package mars.venus;
+import mars.mips.hardware.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+/*
 Copyright (c) 2003-2006,  Pete Sanderson and Kenneth Vollmar
 
 Developed by Pete Sanderson (psanderson@otterbein.edu)
@@ -32,23 +32,39 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 (MIT license, http://www.opensource.org/licenses/mit-license.html)
  */
 	
-    /**
-    * Action  for the File -> New menu item
-    */   			
-    public class FileNewAction extends GuiAction {
-   	 
-       public FileNewAction(String name, Icon icon, String descrip,
-                             Integer mnemonic, KeyStroke accel, VenusUI gui) {
-         super(name, icon, descrip, mnemonic, accel, gui);
-      }
-   	
-   	/**
-   	 * Code to create a new document.  It clears the source code window.
-   	 *
-   	 * @param e component triggering this call
-   	 */
-       public void actionPerformed(ActionEvent e) {
-		   mainUI.editor.newFile();
-      }
+/**
+* Action  for the File -> New menu item
+*/   			
+public class FileNewAction extends GuiAction {
+      
+   public FileNewAction(String name, Icon icon, String descrip,
+                        Integer mnemonic, KeyStroke accel, VenusUI gui) {
+      super(name, icon, descrip, mnemonic, accel, gui);
    }
+   
+   /**
+    * Creates a new FileNewAction object.
+    * 
+    * @param gui  Main GUI
+    */
+   public FileNewAction( VenusUI gui ) {
+      super(
+         "New",
+         gui.multiResolutionIcon("New"),
+         "Create a new file for editing", 
+         Integer.valueOf(KeyEvent.VK_N),
+         KeyStroke.getKeyStroke( KeyEvent.VK_N, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), 
+         gui
+      );
+   }
+
+   /**
+   * Code to create a new document.  It clears the source code window.
+   *
+   * @param e component triggering this call
+   */
+   public void actionPerformed(ActionEvent e) {
+      mainUI.editor.newFile();
+   }
+}
 	

@@ -1,11 +1,7 @@
-   package mars.venus;
-   import mars.simulator.*;
-	import mars.*;
-   import java.util.*;
-   import java.awt.*;
-   import java.awt.event.*;
-   import javax.swing.*;
-   import java.io.*;
+package mars.venus;
+import mars.*;
+import java.awt.event.*;
+import javax.swing.*;
 	
 	/*
 Copyright (c) 2003-2009,  Pete Sanderson and Kenneth Vollmar
@@ -46,6 +42,17 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
        public SettingsStartAtMainAction(String name, Icon icon, String descrip,
                              Integer mnemonic, KeyStroke accel, VenusUI gui) {
          super(name, icon, descrip, mnemonic, accel, gui);
+      }
+
+      public SettingsStartAtMainAction(VenusUI gui) {
+         super(
+            "Initialize Program Counter to global 'main' if defined",
+            null,
+            "If set, assembler will initialize Program Counter to text address globally labeled 'main', if defined",
+            null,
+            null,
+            gui
+         );
       }
    		 
        public void actionPerformed(ActionEvent e) {

@@ -1,12 +1,8 @@
-   package mars.venus;
-   import mars.simulator.*;
-	import mars.*;
-   import java.util.*;
-   import java.awt.*;
-   import java.awt.event.*;
-   import javax.swing.*;
-   import java.io.*;
-	
+package mars.venus;
+import mars.*;
+import java.awt.event.*;
+import javax.swing.*;
+
 	/*
 Copyright (c) 2003-2006,  Pete Sanderson and Kenneth Vollmar
 
@@ -44,6 +40,17 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
        public SettingsAddressDisplayBaseAction(String name, Icon icon, String descrip,
                              Integer mnemonic, KeyStroke accel, VenusUI gui) {
          super(name, icon, descrip, mnemonic, accel, gui);
+      }
+
+      public SettingsAddressDisplayBaseAction(VenusUI gui) {
+         super(
+            "Addresses displayed in hexadecimal",
+            null,
+            "Toggle between hexadecimal and decimal display of memory addresses",
+            null,
+            null,
+            gui
+         );
       }
    		 
          public void actionPerformed(ActionEvent e) {

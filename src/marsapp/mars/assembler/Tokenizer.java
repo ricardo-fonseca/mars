@@ -83,10 +83,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     * that represents a tokenized source statement from the MIPS program.
     **/
    
-       public ArrayList tokenize(MIPSprogram p) throws ProcessingException {
+       public ArrayList<TokenList> tokenize(MIPSprogram p) throws ProcessingException {
          sourceMIPSprogram = p;
          equivalents = new HashMap<String,String>(); // DPS 11-July-2012
-         ArrayList tokenList = new ArrayList();
+         ArrayList<TokenList> tokenList = new ArrayList<TokenList>();
          //ArrayList source = p.getSourceList();
          ArrayList<SourceLine> source = processIncludes(p, new HashMap<String,String>()); // DPS 9-Jan-2013
          p.setSourceLineList(source);
@@ -121,7 +121,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    // includes both direct and indirect.
    // DPS 11-Jan-2013
        private ArrayList<SourceLine> processIncludes(MIPSprogram program, Map<String,String> inclFiles) throws ProcessingException {
-         ArrayList source = program.getSourceList();
+         ArrayList<String> source = program.getSourceList();
          ArrayList<SourceLine> result = new ArrayList<SourceLine>(source.size());
          for (int i=0; i<source.size(); i++) {
             String line = (String) source.get(i);
@@ -276,7 +276,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     * 
     **/		
        public TokenList tokenizeLine(MIPSprogram program, int lineNum, String theLine, boolean doEqvSubstitutes) {
-         TokenTypes tokenType;
+         // TokenTypes tokenType;
          TokenList result = new TokenList();
          if (theLine.length() == 0)
             return result;

@@ -73,11 +73,11 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     * to the list.  Do NOT include the "." in extension.
     * @return array list of matching file names as Strings.  If none, list is empty.
     */
-       public static ArrayList getFilenameList(ClassLoader classLoader,
+       public static ArrayList<String> getFilenameList(ClassLoader classLoader,
                                               String directoryPath, 
                                               String fileExtension  ) {
          fileExtension = checkFileExtension(fileExtension);
-         ArrayList filenameList = new ArrayList();
+         ArrayList<String> filenameList = new ArrayList<String>();
       	// Modified by DPS 10-July-2008 to better handle path containing space
       	// character (%20) and to hopefully handle path containing non-ASCII
       	// characters.  The "toURI()" approach was suggested by MARS user
@@ -216,9 +216,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     * If null or empty string, all files are added.
     * @return array list of matching file names (absolute path).  If none, list is empty. 
     */
-       public static ArrayList getFilenameList(String directoryPath, String fileExtension) {
+       public static ArrayList<String> getFilenameList(String directoryPath, String fileExtension) {
          fileExtension = checkFileExtension(fileExtension);
-         ArrayList filenameList = new ArrayList();
+         ArrayList<String> filenameList = new ArrayList<String>();
          File directory = new File(directoryPath);
          if (directory.isDirectory()) {
             File[] allFiles = directory.listFiles();
@@ -245,8 +245,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     * extension null or empty, all files are added.
     * @return array list of matching file names (absolute path).  If none, list is empty. 
     */
-       public static ArrayList getFilenameList(String directoryPath, ArrayList fileExtensions) {
-         ArrayList filenameList = new ArrayList();
+       public static ArrayList<String> getFilenameList(String directoryPath, ArrayList fileExtensions) {
+         ArrayList<String> filenameList = new ArrayList<String>();
          String fileExtension;
          if (fileExtensions==null || fileExtensions.size()==0) {
             filenameList = getFilenameList(directoryPath,"");
@@ -271,9 +271,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     * If null or empty string, all files are added.  Do NOT include "." in extension.
     * @return array list of matching file names (absolute path).  If none, list is empty. 
     */
-       public static ArrayList getFilenameList(ArrayList nameList, String fileExtension) {
+       public static ArrayList<String> getFilenameList(ArrayList nameList, String fileExtension) {
          fileExtension = checkFileExtension(fileExtension);
-         ArrayList filenameList = new ArrayList();
+         ArrayList<String> filenameList = new ArrayList<String>();
          FileFilter filter = getFileFilter(fileExtension, "", NO_DIRECTORIES);
          for (int i=0; i<nameList.size(); i++) {
             File file = new File((String)nameList.get(i));

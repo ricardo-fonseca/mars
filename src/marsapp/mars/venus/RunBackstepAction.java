@@ -44,6 +44,18 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                              Integer mnemonic, KeyStroke accel, VenusUI gui) {
          super(name, icon, descrip, mnemonic, accel, gui);
       }
+
+      public RunBackstepAction(VenusUI gui) {
+         super(
+            "Backstep",
+            gui.multiResolutionIcon("StepBack"),
+            "Undo the last step", 
+            Integer.valueOf(KeyEvent.VK_B),
+            KeyStroke.getKeyStroke(KeyEvent.VK_F8, 0), 
+            gui
+         );
+      }
+
    		/**
    		 * perform next simulated instruction step.
    		 */  

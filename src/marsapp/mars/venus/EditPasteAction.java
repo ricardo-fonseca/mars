@@ -41,6 +41,18 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                              Integer mnemonic, KeyStroke accel, VenusUI gui) {
          super(name, icon, descrip, mnemonic, accel, gui);
       }
+
+      public EditPasteAction(VenusUI gui) {
+         super(
+            "Paste",
+            gui.multiResolutionIcon("Paste"),
+            "Paste text from clipboard", 
+            Integer.valueOf(KeyEvent.VK_P),
+            KeyStroke.getKeyStroke( KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), 
+            gui
+         );
+      }
+      
    		  
        public void actionPerformed(ActionEvent e){
 		    mainUI.getMainPane().getEditPane().pasteText();

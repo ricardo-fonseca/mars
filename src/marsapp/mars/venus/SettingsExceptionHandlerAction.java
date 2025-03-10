@@ -1,13 +1,10 @@
-   package mars.venus;
-   import mars.simulator.*;
-   import mars.*;
-   import java.util.*;
-   import java.awt.*;
-   import java.awt.event.*;
-   import javax.swing.*;
-   import javax.swing.text.*;
-   import javax.swing.border.*;
-   import java.io.*;
+package mars.venus;
+import mars.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.border.*;
+import java.io.*;
 	
 	/*
 Copyright (c) 2003-2006,  Pete Sanderson and Kenneth Vollmar
@@ -53,6 +50,17 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
        public SettingsExceptionHandlerAction(String name, Icon icon, String descrip,
                              Integer mnemonic, KeyStroke accel, VenusUI gui) {
          super(name, icon, descrip, mnemonic, accel, gui);
+      }
+
+      public SettingsExceptionHandlerAction(VenusUI gui) {
+         super(
+            "Exception Handling...",
+            null,
+            "If set, the specified exception handler file will be included in all Assemble operations",
+            null,
+            null,
+            gui
+         );
       }
    	 
    	 // launch dialog for setting and filename specification

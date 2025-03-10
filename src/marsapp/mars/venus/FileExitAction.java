@@ -41,7 +41,19 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                              Integer mnemonic, KeyStroke accel, VenusUI gui) {
          super(name, icon, descrip, mnemonic, accel, gui);
       }
-   		 
+   	
+      public FileExitAction( VenusUI gui ) {
+         super(
+            "Exit",
+            null,
+            "Exit MARS", 
+            Integer.valueOf(KeyEvent.VK_X),
+            KeyStroke.getKeyStroke( KeyEvent.VK_X, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), 
+            gui
+         );
+      }
+      
+
    	/**
 		 * Exit MARS, unless one or more files have unsaved edits and user cancels.
 		 */	  

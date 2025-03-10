@@ -42,6 +42,17 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                              Integer mnemonic, KeyStroke accel, VenusUI gui) {
          super(name, icon, descrip, mnemonic, accel, gui);
       }
+
+      public FileSaveAction( VenusUI gui ) {
+         super(
+            "Save",
+            gui.multiResolutionIcon("Save"),
+            "Save the current file", 
+            Integer.valueOf(KeyEvent.VK_S),
+            KeyStroke.getKeyStroke( KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), 
+            gui
+         );
+      }
    
       	/** 
 			* saves the file, if not alredy saved it will do a saveAs

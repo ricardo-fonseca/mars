@@ -43,6 +43,17 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                              Integer mnemonic, KeyStroke accel, VenusUI gui) {
          super(name, icon, descrip, mnemonic, accel, gui);
       }
+
+      public RunResetAction(VenusUI gui) {
+         super(
+            "Reset",
+            gui.multiResolutionIcon("Reset"),
+            "Reset MIPS memory and registers", 
+            Integer.valueOf(KeyEvent.VK_R),
+            KeyStroke.getKeyStroke(KeyEvent.VK_F12, 0), 
+            gui
+         );
+      }
    
    /**
     * reset GUI components and MIPS resources

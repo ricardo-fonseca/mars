@@ -1,11 +1,8 @@
-   package mars.venus;
-   import mars.simulator.*;
-   import mars.*;
-   import java.util.*;
-   import java.awt.*;
-   import java.awt.event.*;
-   import javax.swing.*;
-   import java.io.*;
+package mars.venus;
+import mars.simulator.*;
+import mars.*;
+import java.awt.event.*;
+import javax.swing.*;
 	
 	/*
 Copyright (c) 2003-2007,  Pete Sanderson and Kenneth Vollmar
@@ -52,6 +49,17 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
        public SettingsDelayedBranchingAction(String name, Icon icon, String descrip,
                              Integer mnemonic, KeyStroke accel, VenusUI gui) {
          super(name, icon, descrip, mnemonic, accel, gui);
+      }
+
+      public SettingsDelayedBranchingAction(VenusUI gui) {
+         super(
+            "Delayed branching",
+            null,
+            "If set, delayed branching will occur during MIPS execution",
+            null,
+            null,
+            gui
+         );
       }
    		 
        public void actionPerformed(ActionEvent e) {

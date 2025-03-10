@@ -1,8 +1,8 @@
    package mars.venus;
    import mars.*;
+   import java.awt.*;
    import java.awt.event.*;
    import javax.swing.*;
-   import javax.swing.event.*;
 	
 	/*
 Copyright (c) 2003-2006,  Pete Sanderson and Kenneth Vollmar
@@ -49,7 +49,20 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                              Integer mnemonic, KeyStroke accel, VenusUI gui) {
          super(name, icon, descrip, mnemonic, accel, gui);
                }
-   	 /**
+   	 
+      public RunToggleBreakpointsAction(VenusUI gui) {
+         super(
+            "Toggle all breakpoints",
+            null,
+            "Disable/enable all breakpoints without clearing (can also click Bkpt column header)", 
+            Integer.valueOf(KeyEvent.VK_T),
+            KeyStroke.getKeyStroke( KeyEvent.VK_Y, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), 
+            gui
+         );
+      }
+
+
+         /**
 		  *  When this option is selected, tell text segment window to clear breakpoints in its table model.
 		  */
        public void actionPerformed(ActionEvent e) {

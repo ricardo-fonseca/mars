@@ -51,6 +51,18 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                              Integer mnemonic, KeyStroke accel, VenusUI gui) {
          super(name, icon, descrip, mnemonic, accel, gui);
       }
+
+      public RunGoAction(VenusUI gui) {
+         super(
+            "Go",
+            gui.multiResolutionIcon("Play"),
+            "Run the current program",
+            Integer.valueOf(KeyEvent.VK_G),
+            KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0),
+            gui
+         );
+      }
+
    		 
    		 /**
    		  * Action to take when GO is selected -- run the MIPS program!

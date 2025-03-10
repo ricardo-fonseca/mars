@@ -1,14 +1,12 @@
-   package mars;
-	
-   import mars.venus.*;
-   import mars.assembler.*;
-   import mars.simulator.*;
-   import mars.mips.hardware.*;
-	
-   import java.util.*;
-   import java.io.*;
-   import java.awt.event.*;
-   import javax.swing.*;
+package mars;
+
+import mars.assembler.*;
+import mars.simulator.*;
+import mars.mips.hardware.*;
+
+import java.util.*;
+import java.io.*;
+import javax.swing.*;
 
 /*
 Copyright (c) 2003-2006,  Pete Sanderson and Kenneth Vollmar
@@ -53,10 +51,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       private boolean steppedExecution = false;
    
       private String filename;
-      private ArrayList sourceList;
-      private ArrayList tokenList;
-      private ArrayList parsedList;
-      private ArrayList machineList;
+      private ArrayList<String> sourceList;
+      private ArrayList<TokenList> tokenList;
+      private ArrayList<ProgramStatement> parsedList;
+      private ArrayList<ProgramStatement> machineList;
       private BackStepper backStepper;
       private SymbolTable localSymbolTable;
       private MacroPool macroPool;
@@ -68,7 +66,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     * @return ArrayList of String.  Each String is one line of MIPS source code.
     **/
     
-       public ArrayList getSourceList() {
+       public ArrayList<String> getSourceList() {
          return sourceList;
       }
    
@@ -80,7 +78,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	
        public void setSourceLineList(ArrayList<SourceLine> sourceLineList) { 
          this.sourceLineList = sourceLineList; 
-         sourceList = new ArrayList();
+         sourceList = new ArrayList<String>();
          for (SourceLine sl : sourceLineList) {
             sourceList.add(sl.getSource());
          } 
@@ -112,7 +110,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     * @see TokenList
     **/
     
-       public ArrayList getTokenList() {
+       public ArrayList<TokenList> getTokenList() {
          return tokenList;
       }
    
@@ -132,8 +130,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     * @see ProgramStatement
     **/
     
-       public ArrayList createParsedList() {
-         parsedList = new ArrayList();
+       public ArrayList<ProgramStatement> createParsedList() {
+         parsedList = new ArrayList<ProgramStatement>();
          return parsedList;
       }
    
@@ -144,7 +142,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     * @see ProgramStatement
     **/
     
-       public ArrayList getParsedList() {
+       public ArrayList<ProgramStatement> getParsedList() {
          return parsedList;
       }
    
@@ -155,7 +153,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     * @see ProgramStatement
     **/
     
-       public ArrayList getMachineList() {
+       public ArrayList<ProgramStatement> getMachineList() {
          return machineList;
       }
    
@@ -261,8 +259,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     * @throws ProcessingException Will throw exception if errors occured while reading or tokenizing.
     **/
    
-       public ArrayList prepareFilesForAssembly(ArrayList filenames, String leadFilename, String exceptionHandler) throws ProcessingException {
-         ArrayList MIPSprogramsToAssemble = new ArrayList();
+       public ArrayList<MIPSprogram> prepareFilesForAssembly(ArrayList<String> filenames, String leadFilename, String exceptionHandler) throws ProcessingException {
+         ArrayList<MIPSprogram> MIPSprogramsToAssemble = new ArrayList<MIPSprogram>();
          int leadFilePosition = 0;
          if (exceptionHandler != null && exceptionHandler.length() > 0) {
             filenames.add(0, exceptionHandler);

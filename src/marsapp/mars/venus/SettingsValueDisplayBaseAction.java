@@ -45,7 +45,18 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                              Integer mnemonic, KeyStroke accel, VenusUI gui) {
          super(name, icon, descrip, mnemonic, accel, gui);
       }
-   		 
+   	
+      public SettingsValueDisplayBaseAction(VenusUI gui) {
+         super(
+            "Values displayed in hexadecimal",
+            null,
+            "Toggle between hexadecimal and decimal display of memory/register values",
+            null,
+            null,
+            gui
+         );
+      } 
+
        public void actionPerformed(ActionEvent e) {
 		   boolean isHex = ((JCheckBoxMenuItem) e.getSource()).isSelected(); 
 		   Globals.getGui().getMainPane().getExecutePane().getValueDisplayBaseChooser().setSelected(isHex);

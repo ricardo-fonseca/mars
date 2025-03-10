@@ -1,16 +1,13 @@
-   package mars.venus;
-   import mars.simulator.*;
-   import mars.*;
-   import mars.util.*;
-   import mars.mips.hardware.*;
-   import java.util.*;
-   import java.awt.*;
-   import java.awt.event.*;
-   import javax.swing.*;
-   import javax.swing.text.*;
-   import javax.swing.border.*;
-   import javax.swing.event.*;
-   import java.io.*;
+package mars.venus;
+import mars.simulator.*;
+import mars.*;
+import mars.util.*;
+import mars.mips.hardware.*;
+import java.util.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.border.*;
 	
 	/*
 Copyright (c) 2003-2009,  Pete Sanderson and Kenneth Vollmar
@@ -46,9 +43,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     public class SettingsMemoryConfigurationAction extends GuiAction  {
     
       JDialog configDialog;
-      JComboBox fontFamilySelector, fontStyleSelector;
-      JSlider fontSizeSelector;
-      JTextField fontSizeDisplay;
+   
+   //   JComboBox fontFamilySelector, fontStyleSelector;
+   //   JSlider fontSizeSelector;
+   //   JTextField fontSizeDisplay;
       SettingsMemoryConfigurationAction thisAction;
    	
    	// Used to determine upon OK, whether or not anything has changed.
@@ -60,6 +58,14 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
        public SettingsMemoryConfigurationAction(String name, Icon icon, String descrip,
                              Integer mnemonic, KeyStroke accel, VenusUI gui) {
          super(name, icon, descrip, mnemonic, accel, gui);
+         thisAction = this;
+      }
+
+      public SettingsMemoryConfigurationAction(VenusUI gui) {
+         super(
+            "Memory Configuration...",
+            null,
+            "View and modify memory configuration", null, null, gui);
          thisAction = this;
       }
    	 

@@ -1,24 +1,14 @@
-   package mars.venus;
-   import mars.*;
-   import mars.mips.dump.*;
-   import javax.swing.*;
-   import java.awt.*;
-   import java.awt.event.*;
+package mars.venus;
+import mars.*;
 
-import javax.swing.event.*;
-   import java.io.*;
-   import java.net.*;
-import java.util.function.Predicate;
-import java.util.prefs.PreferenceChangeEvent;
-import java.util.zip.ZipFile;
-
-import javax.imageio.*;
-
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.net.*;
 import java.util.ArrayList;
 import java.util.List;
-
 import java.awt.image.*;
-import java.util.Enumeration;
+
 
 /*
 Copyright (c) 2003-2013,  Pete Sanderson and Kenneth Vollmar
@@ -262,219 +252,54 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          Toolkit tk = Toolkit.getDefaultToolkit();
          Class cs = this.getClass(); 
          try {
-            fileNewAction = new FileNewAction("New", 
-                                            new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"New22.png"))),
-                                            "Create a new file for editing", Integer.valueOf(KeyEvent.VK_N),
-               									  KeyStroke.getKeyStroke( KeyEvent.VK_N, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-               									  mainUI);		
-            fileOpenAction = new FileOpenAction("Open ...", 
-                                            new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"Open22.png"))),
-               									  "Open a file for editing", Integer.valueOf(KeyEvent.VK_O),
-               									  KeyStroke.getKeyStroke( KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-               									  mainUI);	
-            fileCloseAction = new FileCloseAction("Close", null,
-                                            "Close the current file", Integer.valueOf(KeyEvent.VK_C),
-               									  KeyStroke.getKeyStroke( KeyEvent.VK_W, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-               									  mainUI);						
-            fileCloseAllAction = new FileCloseAllAction("Close All", null,
-                                            "Close all open files", Integer.valueOf(KeyEvent.VK_L),
-               									  null, mainUI);	
-            fileSaveAction = new FileSaveAction("Save", 
-                                            new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"Save22.png"))),
-               									  "Save the current file", Integer.valueOf(KeyEvent.VK_S),
-               									  KeyStroke.getKeyStroke( KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-               									  mainUI);	
-            fileSaveAsAction = new FileSaveAsAction("Save as ...", 
-                                            new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"SaveAs22.png"))),
-               									  "Save current file with different name", Integer.valueOf(KeyEvent.VK_A),
-               									  null, mainUI);	
-            fileSaveAllAction = new FileSaveAllAction("Save All", null,
-                                            "Save all open files", Integer.valueOf(KeyEvent.VK_V),
-               									  null, mainUI);	
-            fileDumpMemoryAction = new FileDumpMemoryAction("Dump Memory ...", 
-                                            new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"Dump22.png"))),
-               									  "Dump machine code or data in an available format", Integer.valueOf(KeyEvent.VK_D),
-               									  KeyStroke.getKeyStroke( KeyEvent.VK_D, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-               									  mainUI);	
-            filePrintAction = new FilePrintAction("Print ...", 
-                                            new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"Print22.png"))),
-               									  "Print current file", Integer.valueOf(KeyEvent.VK_P),
-               									  KeyStroke.getKeyStroke( KeyEvent.VK_P, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-                                            mainUI);	
-            fileExitAction = new FileExitAction("Exit", null,
-               	                          "Exit Mars", Integer.valueOf(KeyEvent.VK_X),
-               									  null, mainUI);	
-            editUndoAction = new EditUndoAction("Undo", 
-                                            new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"Undo22.png"))),
-               									  "Undo last edit", Integer.valueOf(KeyEvent.VK_U),
-                                            KeyStroke.getKeyStroke( KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-               									  mainUI);	
-            editRedoAction = new EditRedoAction("Redo", 
-                                            new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"Redo22.png"))),
-               									  "Redo last edit", Integer.valueOf(KeyEvent.VK_R),
-                                            KeyStroke.getKeyStroke( KeyEvent.VK_Y, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-               									  mainUI);			
-            editCutAction = new EditCutAction("Cut", 
-                                            new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"Cut22.png"))),
-               									  "Cut", Integer.valueOf(KeyEvent.VK_C),
-               									  KeyStroke.getKeyStroke( KeyEvent.VK_X, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-               									  mainUI);	
-            editCopyAction = new EditCopyAction("Copy", 
-                                            new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"Copy22.png"))),
-               									  "Copy", Integer.valueOf(KeyEvent.VK_O),
-               									  KeyStroke.getKeyStroke( KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-               									  mainUI);	
-            editPasteAction = new EditPasteAction("Paste", 
-                                            new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"Paste22.png"))),
-               									  "Paste", Integer.valueOf(KeyEvent.VK_P),
-               									  KeyStroke.getKeyStroke( KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-               									  mainUI);	
-            editFindReplaceAction = new EditFindReplaceAction("Find/Replace", 
-                                            new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"Find22.png"))),
-               									  "Find/Replace", Integer.valueOf(KeyEvent.VK_F),
-               									  KeyStroke.getKeyStroke( KeyEvent.VK_F, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-               									  mainUI);
-            editSelectAllAction = new EditSelectAllAction("Select All", 
-                                            null, //new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"Find22.png"))),
-               									  "Select All", Integer.valueOf(KeyEvent.VK_A),
-               									  KeyStroke.getKeyStroke( KeyEvent.VK_A, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-               									  mainUI);
-            runAssembleAction = new RunAssembleAction("Assemble",  
-                                            new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"Assemble22.png"))),
-               									  "Assemble the current file and clear breakpoints", Integer.valueOf(KeyEvent.VK_A),
-               									  KeyStroke.getKeyStroke( KeyEvent.VK_F3, 0), 
-               									  mainUI);			
-            runGoAction = new RunGoAction("Go", 
-                                            new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"Play22.png"))),
-               									  "Run the current program", Integer.valueOf(KeyEvent.VK_G),
-               									  KeyStroke.getKeyStroke( KeyEvent.VK_F5, 0),
-               									  mainUI);	
-            runStepAction = new RunStepAction("Step", 
-                                            new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"StepForward22.png"))),
-               									  "Run one step at a time", Integer.valueOf(KeyEvent.VK_T),
-               									  KeyStroke.getKeyStroke( KeyEvent.VK_F7, 0),
-               									  mainUI);	
-            runBackstepAction = new RunBackstepAction("Backstep", 
-                                            new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"StepBack22.png"))),
-               									  "Undo the last step", Integer.valueOf(KeyEvent.VK_B),
-               									  KeyStroke.getKeyStroke( KeyEvent.VK_F8, 0), 
-               									  mainUI);	
-            runPauseAction = new RunPauseAction("Pause", 
-                                            new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"Pause22.png"))),
-               									  "Pause the currently running program", Integer.valueOf(KeyEvent.VK_P),
-               									  KeyStroke.getKeyStroke( KeyEvent.VK_F9, 0), 
-               									  mainUI);	
-            runStopAction = new RunStopAction("Stop", 
-                                            new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"Stop22.png"))),
-               									  "Stop the currently running program", Integer.valueOf(KeyEvent.VK_S),
-               									  KeyStroke.getKeyStroke( KeyEvent.VK_F11, 0), 
-               									  mainUI);
-            runResetAction = new RunResetAction("Reset", 
-                                            new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"Reset22.png"))),
-               									  "Reset MIPS memory and registers", Integer.valueOf(KeyEvent.VK_R),
-               									  KeyStroke.getKeyStroke( KeyEvent.VK_F12,0),
-               									  mainUI);	
-            runClearBreakpointsAction = new RunClearBreakpointsAction("Clear all breakpoints",
-                                            null,
-               									  "Clears all execution breakpoints set since the last assemble.",
-               									  Integer.valueOf(KeyEvent.VK_K),
-               									  KeyStroke.getKeyStroke( KeyEvent.VK_K, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-               									  mainUI);  
-            runToggleBreakpointsAction = new RunToggleBreakpointsAction("Toggle all breakpoints",
-                                            null,
-               									  "Disable/enable all breakpoints without clearing (can also click Bkpt column header)",
-               									  Integer.valueOf(KeyEvent.VK_T),
-               									  KeyStroke.getKeyStroke( KeyEvent.VK_T, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-               									  mainUI);  
-            settingsLabelAction = new SettingsLabelAction("Show Labels Window (symbol table)",
-                                            null,
-               									  "Toggle visibility of Labels window (symbol table) in the Execute tab",
-               									  null,null,
-               									  mainUI);
-            settingsPopupInputAction = new SettingsPopupInputAction("Popup dialog for input syscalls (5,6,7,8,12)",
-                                            null,
-               									  "If set, use popup dialog for input syscalls (5,6,7,8,12) instead of cursor in Run I/O window",
-               									  null,null,
-               									  mainUI);
-         
-            settingsValueDisplayBaseAction = new SettingsValueDisplayBaseAction("Values displayed in hexadecimal",
-                                            null,
-               									  "Toggle between hexadecimal and decimal display of memory/register values",
-               									  null,null,
-               									  mainUI);
-            settingsAddressDisplayBaseAction = new SettingsAddressDisplayBaseAction("Addresses displayed in hexadecimal",
-                                            null,
-               									  "Toggle between hexadecimal and decimal display of memory addresses",
-               									  null,null,
-               									  mainUI);
-            settingsExtendedAction          = new SettingsExtendedAction("Permit extended (pseudo) instructions and formats",
-                                            null,
-               									  "If set, MIPS extended (pseudo) instructions are formats are permitted.",
-               									  null,null,
-               									  mainUI);    
-            settingsAssembleOnOpenAction    = new SettingsAssembleOnOpenAction("Assemble file upon opening",
-                                            null,
-               									  "If set, a file will be automatically assembled as soon as it is opened.  File Open dialog will show most recently opened file.",
-               									  null,null,
-               									  mainUI);
-            settingsAssembleAllAction       = new SettingsAssembleAllAction("Assemble all files in directory",
-                                            null,
-               									  "If set, all files in current directory will be assembled when Assemble operation is selected.",
-               									  null,null,
-               									  mainUI);
-            settingsWarningsAreErrorsAction = new SettingsWarningsAreErrorsAction("Assembler warnings are considered errors",
-                                            null,
-               									  "If set, assembler warnings will be interpreted as errors and prevent successful assembly.",
-               									  null,null,
-               									  mainUI);
-            settingsStartAtMainAction       = new SettingsStartAtMainAction("Initialize Program Counter to global 'main' if defined",
-                                            null,
-               									  "If set, assembler will initialize Program Counter to text address globally labeled 'main', if defined.",
-               									  null,null,
-               									  mainUI);
-            settingsProgramArgumentsAction = new SettingsProgramArgumentsAction("Program arguments provided to MIPS program",
-                                            null,
-               									  "If set, program arguments for MIPS program can be entered in border of Text Segment window.",
-               									  null,null,
-               									  mainUI);
-            settingsDelayedBranchingAction  = new SettingsDelayedBranchingAction("Delayed branching",
-                                            null,
-               									  "If set, delayed branching will occur during MIPS execution.",
-               									  null,null,
-               									  mainUI);
-            settingsSelfModifyingCodeAction  = new SettingsSelfModifyingCodeAction("Self-modifying code",
-                                            null,
-               									  "If set, the MIPS program can write and branch to both text and data segments.",
-               									  null,null,
-               									  mainUI);
-            settingsEditorAction          = new SettingsEditorAction("Editor...",
-                                            null,
-               									  "View and modify text editor settings.",
-               									  null,null,
-               									  mainUI);
-            settingsHighlightingAction          = new SettingsHighlightingAction("Highlighting...",
-                                            null,
-               									  "View and modify Execute Tab highlighting colors",
-               									  null,null,
-               									  mainUI);
-            settingsExceptionHandlerAction  = new SettingsExceptionHandlerAction("Exception Handler...",
-                                            null,
-               									  "If set, the specified exception handler file will be included in all Assemble operations.",
-               									  null,null,
-               									  mainUI);
-            settingsMemoryConfigurationAction  = new SettingsMemoryConfigurationAction("Memory Configuration...",
-                                            null,
-               									  "View and modify memory segment base addresses for simulated MIPS.",
-               									  null,null,
-               									  mainUI);
-            helpHelpAction = new HelpHelpAction("Help", 
-                                            // new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"Help22.png"))),
-               									  UIManager.getIcon( "HelpButton.icon"),
-                                            "Help", Integer.valueOf(KeyEvent.VK_H),
-               									  KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0),
-               									  mainUI);	
-            helpAboutAction = new HelpAboutAction("About ...",null, 
-                                            "Information about Mars", null,null, mainUI);	
+            fileNewAction           = new FileNewAction( mainUI );
+            fileOpenAction          = new FileOpenAction(mainUI);
+            fileCloseAction         = new FileCloseAction( mainUI );
+            fileCloseAllAction      = new FileCloseAllAction( mainUI );
+            fileSaveAction          = new FileSaveAction( mainUI );
+            fileSaveAsAction        = new FileSaveAsAction( mainUI );
+            fileSaveAllAction       = new FileSaveAllAction( mainUI ); 
+            fileDumpMemoryAction    = new FileDumpMemoryAction( mainUI );
+            filePrintAction         = new FilePrintAction( mainUI );
+            fileExitAction          = new FileExitAction( mainUI );	
+
+            editUndoAction          = new EditUndoAction( mainUI );
+            editRedoAction          = new EditRedoAction( mainUI );
+            editCutAction           = new EditCutAction( mainUI );
+            editCopyAction          = new EditCopyAction( mainUI );
+            editPasteAction         = new EditPasteAction( mainUI );
+            editFindReplaceAction   = new EditFindReplaceAction( mainUI );
+            editSelectAllAction     = new EditSelectAllAction( mainUI );
+
+            runAssembleAction       = new RunAssembleAction( mainUI );
+            runGoAction             = new RunGoAction( mainUI );
+            runStepAction           = new RunStepAction( mainUI );
+            runBackstepAction       = new RunBackstepAction( mainUI );
+            runPauseAction          = new RunPauseAction( mainUI );
+            runStopAction           = new RunStopAction( mainUI );
+            runResetAction          = new RunResetAction( mainUI );
+            runClearBreakpointsAction = new RunClearBreakpointsAction( mainUI );
+            runToggleBreakpointsAction = new RunToggleBreakpointsAction( mainUI );
+
+            settingsLabelAction = new SettingsLabelAction(mainUI);
+            settingsPopupInputAction = new SettingsPopupInputAction(mainUI);
+            settingsValueDisplayBaseAction = new SettingsValueDisplayBaseAction(mainUI);
+            settingsAddressDisplayBaseAction = new SettingsAddressDisplayBaseAction(mainUI);
+            settingsExtendedAction = new SettingsExtendedAction(mainUI);
+            settingsAssembleOnOpenAction = new SettingsAssembleOnOpenAction(mainUI);
+            settingsAssembleAllAction = new SettingsAssembleAllAction(mainUI);
+            settingsWarningsAreErrorsAction = new SettingsWarningsAreErrorsAction(mainUI);
+            settingsStartAtMainAction = new SettingsStartAtMainAction(mainUI);
+            settingsProgramArgumentsAction = new SettingsProgramArgumentsAction(mainUI);
+            settingsDelayedBranchingAction = new SettingsDelayedBranchingAction(mainUI);
+            settingsSelfModifyingCodeAction = new SettingsSelfModifyingCodeAction(mainUI);
+            settingsEditorAction = new SettingsEditorAction(mainUI);
+            settingsHighlightingAction = new SettingsHighlightingAction(mainUI);
+            settingsExceptionHandlerAction = new SettingsExceptionHandlerAction(mainUI);
+            settingsMemoryConfigurationAction = new SettingsMemoryConfigurationAction(mainUI);
+
+            helpHelpAction = new HelpHelpAction( mainUI );
+            helpAboutAction = new HelpAboutAction( mainUI );
          } 
              catch (NullPointerException e) {
                System.out.println("Internal Error: images folder not found, or other null pointer exception while creating Action objects");
@@ -657,33 +482,47 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          run.add(runToggleBreakpoints);
       	
          settingsLabel = new JCheckBoxMenuItem(settingsLabelAction);
-         settingsLabel.setSelected(Globals.getSettings().getLabelWindowVisibility());
+         settingsLabel.setSelected(Globals.getSettings().getBooleanSetting(Settings.LABEL_WINDOW_VISIBILITY));
+
          settingsPopupInput = new JCheckBoxMenuItem(settingsPopupInputAction);
          settingsPopupInput.setSelected(Globals.getSettings().getBooleanSetting(Settings.POPUP_SYSCALL_INPUT));
+
          settingsValueDisplayBase = new JCheckBoxMenuItem(settingsValueDisplayBaseAction);
-         settingsValueDisplayBase.setSelected(Globals.getSettings().getDisplayValuesInHex());//mainPane.getExecutePane().getValueDisplayBaseChooser().isSelected());
+         settingsValueDisplayBase.setSelected(Globals.getSettings().getBooleanSetting(Settings.DISPLAY_VALUES_IN_HEX));
+
          // Tell the corresponding JCheckBox in the Execute Pane about me -- it has already been created.
          mainPane.getExecutePane().getValueDisplayBaseChooser().setSettingsMenuItem(settingsValueDisplayBase);
          settingsAddressDisplayBase = new JCheckBoxMenuItem(settingsAddressDisplayBaseAction);
-         settingsAddressDisplayBase.setSelected(Globals.getSettings().getDisplayAddressesInHex());//mainPane.getExecutePane().getValueDisplayBaseChooser().isSelected());
+         settingsAddressDisplayBase.setSelected(Globals.getSettings().getBooleanSetting(Settings.DISPLAY_ADDRESSES_IN_HEX));
+         
+
          // Tell the corresponding JCheckBox in the Execute Pane about me -- it has already been created.
          mainPane.getExecutePane().getAddressDisplayBaseChooser().setSettingsMenuItem(settingsAddressDisplayBase);
          settingsExtended = new JCheckBoxMenuItem(settingsExtendedAction);
-         settingsExtended.setSelected(Globals.getSettings().getExtendedAssemblerEnabled());
+         settingsExtended.setSelected(Globals.getSettings().getBooleanSetting(Settings.EXTENDED_ASSEMBLER_ENABLED));
+
          settingsDelayedBranching = new JCheckBoxMenuItem(settingsDelayedBranchingAction);
-         settingsDelayedBranching.setSelected(Globals.getSettings().getDelayedBranchingEnabled());
+         settingsDelayedBranching.setSelected(Globals.getSettings().getBooleanSetting(Settings.DELAYED_BRANCHING_ENABLED));
+
          settingsSelfModifyingCode = new JCheckBoxMenuItem(settingsSelfModifyingCodeAction);
          settingsSelfModifyingCode.setSelected(Globals.getSettings().getBooleanSetting(Settings.SELF_MODIFYING_CODE_ENABLED));
+
          settingsAssembleOnOpen = new JCheckBoxMenuItem(settingsAssembleOnOpenAction);
-         settingsAssembleOnOpen.setSelected(Globals.getSettings().getAssembleOnOpenEnabled());
+         settingsAssembleOnOpen.setSelected(Globals.getSettings().getBooleanSetting(Settings.ASSEMBLE_ON_OPEN_ENABLED));
+
          settingsAssembleAll = new JCheckBoxMenuItem(settingsAssembleAllAction);
-         settingsAssembleAll.setSelected(Globals.getSettings().getAssembleAllEnabled());
+         settingsAssembleAll.setSelected(Globals.getSettings().getBooleanSetting(Settings.ASSEMBLE_ALL_ENABLED));
+
          settingsWarningsAreErrors = new JCheckBoxMenuItem(settingsWarningsAreErrorsAction);
-         settingsWarningsAreErrors.setSelected(Globals.getSettings().getWarningsAreErrors());
+         settingsWarningsAreErrors.setSelected(Globals.getSettings().getBooleanSetting(Settings.WARNINGS_ARE_ERRORS));
+
          settingsStartAtMain = new JCheckBoxMenuItem(settingsStartAtMainAction);
-         settingsStartAtMain.setSelected(Globals.getSettings().getStartAtMain()); 
+         settingsStartAtMain.setSelected(Globals.getSettings().getBooleanSetting(Settings.START_AT_MAIN));
+
          settingsProgramArguments = new JCheckBoxMenuItem(settingsProgramArgumentsAction);
-         settingsProgramArguments.setSelected(Globals.getSettings().getProgramArguments());
+         settingsProgramArguments.setSelected(Globals.getSettings().getBooleanSetting(Settings.PROGRAM_ARGUMENTS));
+
+
          settingsEditor = new JMenuItem(settingsEditorAction);
          settingsHighlighting = new JMenuItem(settingsHighlightingAction);
          settingsExceptionHandler = new JMenuItem(settingsExceptionHandlerAction);
@@ -745,9 +584,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          JToolBar toolBar = new JToolBar();
       	
          New = new JButton(fileNewAction);
+         New.setText("");
          New.setIcon( multiResolutionIcon("New") );
 
-         New.setText("");
          Open = new JButton(fileOpenAction);
          Open.setText(""); 
          Open.setIcon( multiResolutionIcon("Open") );
@@ -1333,7 +1172,6 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          );
 
          Toolkit tk = Toolkit.getDefaultToolkit();
-         Class cs = this.getClass();
 
          // Load images
          List<Image> images = new ArrayList<Image>();
@@ -1341,7 +1179,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             try {
                // We need to use this method because we may be reading
                // from the jar file
-               images.add( tk.getImage(cs.getResource(url)) );
+               images.add( tk.getImage(this.getClass().getResource(url)) );
             }
             catch (Exception e) {
                System.out.println("Unable to read image " + url );
@@ -1352,7 +1190,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          // Create a MultiResolutionImage from the images
          BaseMultiResolutionImage multiResolutionImage = 
             new BaseMultiResolutionImage(images.toArray(new Image[0]));
-
+         
          // Create an ImageIcon from them
          return new ImageIcon( multiResolutionImage );
       }

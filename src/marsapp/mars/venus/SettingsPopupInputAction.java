@@ -1,8 +1,8 @@
-   package mars.venus;
+package mars.venus;
 
-	import mars.*;
-   import java.awt.event.*;
-   import javax.swing.*;
+import mars.*;
+import java.awt.event.*;
+import javax.swing.*;
 	
 	/*
 Copyright (c) 2003-2010,  Pete Sanderson and Kenneth Vollmar
@@ -41,6 +41,17 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
        public SettingsPopupInputAction(String name, Icon icon, String descrip,
                              Integer mnemonic, KeyStroke accel, VenusUI gui) {
          super(name, icon, descrip, mnemonic, accel, gui);
+      }
+
+      public SettingsPopupInputAction(VenusUI gui) {
+         super(
+            "Popup dialog for input syscalls (5,6,7,8,12)",
+            null,
+            "If set, use popup dialog for input syscalls (5,6,7,8,12) instead of cursor in Run I/O window",
+            null,
+            null,
+            gui
+         );
       }
    		 
        public void actionPerformed(ActionEvent e) {

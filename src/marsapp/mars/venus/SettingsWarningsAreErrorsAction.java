@@ -1,11 +1,7 @@
-   package mars.venus;
-   import mars.simulator.*;
-	import mars.*;
-   import java.util.*;
-   import java.awt.*;
-   import java.awt.event.*;
-   import javax.swing.*;
-   import java.io.*;
+package mars.venus;
+import mars.*;
+import java.awt.event.*;
+import javax.swing.*;
 	
 	/*
 Copyright (c) 2003-2008,  Pete Sanderson and Kenneth Vollmar
@@ -46,6 +42,17 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
        public SettingsWarningsAreErrorsAction(String name, Icon icon, String descrip,
                              Integer mnemonic, KeyStroke accel, VenusUI gui) {
          super(name, icon, descrip, mnemonic, accel, gui);
+      }
+
+      public SettingsWarningsAreErrorsAction(VenusUI gui) {
+         super(
+            "Assembler warnings are considered errors",
+            null,
+            "If set, assembler warnings will be interpreted as errors and prevent successful assembly",
+            null,
+            null,
+            gui
+         );
       }
    		 
        public void actionPerformed(ActionEvent e) {

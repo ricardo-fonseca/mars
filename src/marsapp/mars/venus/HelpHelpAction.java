@@ -1,14 +1,14 @@
-   package mars.venus;
-   import mars.*;
-   import mars.assembler.*;
-   import mars.mips.instructions.*;
-   import java.util.*;
-   import java.io.*;
-   import java.awt.*;
-   import java.awt.event.*;
-   import javax.swing.*;
-   import javax.swing.event.*;
-   import javax.swing.text.html.*;
+package mars.venus;
+import mars.*;
+import mars.assembler.*;
+import mars.mips.instructions.*;
+import java.util.*;
+import java.io.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.*;
+import javax.swing.text.html.*;
 	
 	/*
 Copyright (c) 2003-2008,  Pete Sanderson and Kenneth Vollmar
@@ -47,6 +47,15 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          super(name, icon, descrip, mnemonic, accel, gui);
       }
    	
+      public HelpHelpAction(VenusUI gui) {
+         super(
+            "Help",
+            UIManager.getIcon( "HelpButton.icon"),
+            "Display help information",
+            Integer.valueOf(KeyEvent.VK_H),
+            KeyStroke.getKeyStroke(KeyEvent.VK_H, 0), gui);
+      }
+
    	// ideally read or computed from config file...
        private Dimension getSize() {
          return new Dimension(800,600);

@@ -43,6 +43,19 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          super(name, icon, descrip, mnemonic, accel, gui);
          setEnabled(false);
       }
+
+      public EditRedoAction( VenusUI gui ) {
+         super(
+            "Redo",
+            gui.multiResolutionIcon("Redo"),
+            "Redo last edit", 
+            Integer.valueOf(KeyEvent.VK_R),
+            KeyStroke.getKeyStroke( KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx() | KeyEvent.SHIFT_DOWN_MASK), 
+            gui
+         );
+         setEnabled(false);
+      }
+
    	  /**
    	   * Adapted from TextComponentDemo.java in the
    	   * Java Tutorial "Text Component Features"

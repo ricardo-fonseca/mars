@@ -42,6 +42,17 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          super(name, icon, descrip, mnemonic, accel, gui);
       }
    	
+      public FileCloseAction( VenusUI gui ) {
+         super(
+            "Close",
+            null,
+            "Close the current file", 
+            Integer.valueOf(KeyEvent.VK_W),
+            KeyStroke.getKeyStroke( KeyEvent.VK_W, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), 
+            gui
+         );
+      }
+
        public void actionPerformed(ActionEvent e){
 		      mainUI.editor.close();
       }

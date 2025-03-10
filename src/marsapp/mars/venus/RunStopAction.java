@@ -44,7 +44,18 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                              Integer mnemonic, KeyStroke accel, VenusUI gui) {
          super(name, icon, descrip, mnemonic, accel, gui);
       }
-   		 
+   	
+      public RunStopAction(VenusUI gui) {
+         super(
+            "Stop",
+            gui.multiResolutionIcon("Stop"),
+            "Stop execution of the current program", 
+            Integer.valueOf(KeyEvent.VK_S),
+            KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0), 
+            gui
+         );
+      }
+
        public void actionPerformed(ActionEvent e) {
          Simulator.getInstance().stopExecution(this);
 			// RunGoAction's "stopped" method will take care of the cleanup.

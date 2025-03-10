@@ -42,6 +42,17 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          super(name, icon, descrip, mnemonic, accel, gui);
       }
    	
+      public FileSaveAllAction( VenusUI gui ) {
+         super(
+            "Save All",
+            null,
+            "Save all open files", 
+            Integer.valueOf(KeyEvent.VK_V),
+            null, 
+            gui
+         );
+      }
+
        public void actionPerformed(ActionEvent e){
 		      mainUI.editor.saveAll();
       }

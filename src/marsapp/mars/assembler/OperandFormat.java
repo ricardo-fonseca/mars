@@ -1,9 +1,3 @@
-   package mars.assembler;
-   import mars.*;
-   import mars.util.Binary;
-   import mars.mips.instructions.*;
-   import java.util.*;
-
 /*
 Copyright (c) 2003-2008,  Pete Sanderson and Kenneth Vollmar
 
@@ -39,6 +33,11 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * @version August 2003
  */
 
+package mars.assembler;
+import mars.*;
+import mars.util.Binary;
+import mars.mips.instructions.*;
+import java.util.*;
 
     public class OperandFormat {
    
@@ -69,13 +68,13 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     * first such Instruction that has an exact operand match.  If none match, 
     * return the first Instruction and let client deal with operand mismatches.  
     */
-       static Instruction bestOperandMatch(TokenList tokenList, ArrayList instrMatches) {
+       static Instruction bestOperandMatch(TokenList tokenList, ArrayList<Instruction> instrMatches) {
          if (instrMatches == null)
             return null;
          if (instrMatches.size() == 1)
-            return (Instruction) instrMatches.get(0);
+            return instrMatches.get(0);
          for (int i=0; i<instrMatches.size(); i++) {
-            Instruction potentialMatch = (Instruction) instrMatches.get(i);
+            Instruction potentialMatch = instrMatches.get(i);
             if (tokenOperandMatch(tokenList, potentialMatch, new ErrorList())) 
                return potentialMatch;
          }

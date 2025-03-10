@@ -1,8 +1,7 @@
-   package mars.mips.dump;
+package mars.mips.dump;
+import mars.mips.hardware.*;
+import java.io.*;
 
-   import mars.Globals;
-   import mars.mips.hardware.*;
-   import java.io.*;
 /*
 Copyright (c) 2003-2008,  Pete Sanderson and Kenneth Vollmar
 

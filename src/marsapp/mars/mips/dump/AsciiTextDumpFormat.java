@@ -75,7 +75,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
        public void dumpMemoryRange(File file, int firstAddress, int lastAddress) 
         throws AddressErrorException, IOException {
          PrintStream out = new PrintStream(new FileOutputStream(file));
-         String string = null;
+         //String string = null;
          try {
             for (int address = firstAddress; address <= lastAddress; address += Memory.WORD_LENGTH_BYTES) {
                Integer temp = Globals.memory.getRawWordOrNull(address);

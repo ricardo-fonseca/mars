@@ -43,6 +43,16 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          super(name, icon, descrip, mnemonic, accel, gui);
       }
    
+      public FileSaveAsAction( VenusUI gui ) {
+         super(
+            "Save As...",
+            gui.multiResolutionIcon("SaveAs"),
+            "Save the current file with a new name", 
+            Integer.valueOf(KeyEvent.VK_A),
+            KeyStroke.getKeyStroke( KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx() | KeyEvent.SHIFT_DOWN_MASK), 
+            gui
+         );
+      }
    
        public void actionPerformed(ActionEvent e){
 		    mainUI.editor.saveAs();        

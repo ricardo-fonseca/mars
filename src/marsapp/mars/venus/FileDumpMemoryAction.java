@@ -64,7 +64,17 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          super(name, icon, descrip, mnemonic, accel, gui);
       
       }
-   
+      
+      public FileDumpMemoryAction( VenusUI gui ) {
+         super(
+            "Dump Memory...",
+            gui.multiResolutionIcon("Dump"),
+            "Dump machine code or data in an available format",
+            Integer.valueOf(KeyEvent.VK_D),
+            KeyStroke.getKeyStroke( KeyEvent.VK_D, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), 
+            gui
+         );
+      }
    
        public void actionPerformed(ActionEvent e){
          dumpMemory();        

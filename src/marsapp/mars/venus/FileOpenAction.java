@@ -52,6 +52,18 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                              Integer mnemonic, KeyStroke accel, VenusUI gui) {
          super(name, icon, descrip, mnemonic, accel, gui);
       }
+
+      public FileOpenAction( VenusUI gui ) {
+         super(
+            "Open...",
+            gui.multiResolutionIcon("Open"),
+            "Open a file for editing", 
+            Integer.valueOf(KeyEvent.VK_O),
+            KeyStroke.getKeyStroke( KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), 
+            gui
+         );
+
+      }
    	 
        /**
    	  * Launch a file chooser for name of file to open

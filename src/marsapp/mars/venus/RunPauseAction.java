@@ -43,6 +43,17 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                              Integer mnemonic, KeyStroke accel, VenusUI gui) {
          super(name, icon, descrip, mnemonic, accel, gui);
       }
+
+      public RunPauseAction(VenusUI gui) {
+         super(
+            "Pause",
+            gui.multiResolutionIcon("Pause"),
+            "Pause execution of the current program", 
+            Integer.valueOf(KeyEvent.VK_P),
+            KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0), 
+            gui
+         );
+      }
    		 
        public void actionPerformed(ActionEvent e) {
          Simulator.getInstance().stopExecution(this);

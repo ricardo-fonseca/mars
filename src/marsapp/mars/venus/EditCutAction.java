@@ -41,7 +41,18 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                              Integer mnemonic, KeyStroke accel, VenusUI gui) {
          super(name, icon, descrip, mnemonic, accel, gui);
       }
-   		  
+   	
+      public EditCutAction(VenusUI gui) {
+         super(
+            "Cut",
+            gui.multiResolutionIcon("Cut"),
+            "Cut selected text to clipboard", 
+            Integer.valueOf(KeyEvent.VK_C),
+            KeyStroke.getKeyStroke( KeyEvent.VK_X, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), 
+            gui
+         );
+      }
+
        public void actionPerformed(ActionEvent e){
 		    mainUI.getMainPane().getEditPane().cutText();
       }

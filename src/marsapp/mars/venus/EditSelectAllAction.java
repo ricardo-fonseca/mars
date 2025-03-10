@@ -41,6 +41,17 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                              Integer mnemonic, KeyStroke accel, VenusUI gui) {
          super(name, icon, descrip, mnemonic, accel, gui);
       }
+
+      public EditSelectAllAction( VenusUI gui ) {
+         super(
+            "Select All",
+            null,
+            "Select all text", 
+            Integer.valueOf(KeyEvent.VK_A),
+            KeyStroke.getKeyStroke( KeyEvent.VK_A, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), 
+            gui
+         );
+      }
    		  
        public void actionPerformed(ActionEvent e){
 		    mainUI.getMainPane().getEditPane().selectAllText();

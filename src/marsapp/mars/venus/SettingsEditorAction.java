@@ -1,17 +1,13 @@
-   package mars.venus;
-   import mars.simulator.*;
-   import mars.*;
-   import mars.util.*;
-   import mars.venus.editors.jeditsyntax.*;
-   import mars.venus.editors.jeditsyntax.tokenmarker.*;
-   import java.util.*;
-   import java.awt.*;
-   import java.awt.event.*;
-   import javax.swing.*;
-   import javax.swing.text.*;
-   import javax.swing.border.*;
-   import javax.swing.event.*;
-   import java.io.*;
+package mars.venus;
+import mars.*;
+import mars.venus.editors.jeditsyntax.*;
+import mars.venus.editors.jeditsyntax.tokenmarker.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.text.*;
+import javax.swing.border.*;
+import javax.swing.event.*;
 	
 	/*
 Copyright (c) 2003-2011,  Pete Sanderson and Kenneth Vollmar
@@ -60,6 +56,12 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
        public SettingsEditorAction(String name, Icon icon, String descrip,
                              Integer mnemonic, KeyStroke accel, VenusUI gui) {
          super(name, icon, descrip, mnemonic, accel, gui);
+      }
+
+      public SettingsEditorAction(VenusUI gui) {
+         super("Editor...", 
+         null, 
+         "View and modify text editor settings", null, null, gui);
       }
    	 
    	 /**

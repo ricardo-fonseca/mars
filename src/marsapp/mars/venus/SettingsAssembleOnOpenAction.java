@@ -1,11 +1,7 @@
-   package mars.venus;
-   import mars.simulator.*;
-	import mars.*;
-   import java.util.*;
-   import java.awt.*;
-   import java.awt.event.*;
-   import javax.swing.*;
-   import java.io.*;
+package mars.venus;
+import mars.*;
+import java.awt.event.*;
+import javax.swing.*;
 	
 	/*
 Copyright (c) 2003-2006,  Pete Sanderson and Kenneth Vollmar
@@ -44,6 +40,17 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
        public SettingsAssembleOnOpenAction(String name, Icon icon, String descrip,
                              Integer mnemonic, KeyStroke accel, VenusUI gui) {
          super(name, icon, descrip, mnemonic, accel, gui);
+      }
+
+      public SettingsAssembleOnOpenAction(VenusUI gui) {
+         super(
+            "Assemble file upon opening",
+            null,
+            "If set, MIPS program is assembled automatically upon opening",
+            null,
+            null,
+            gui
+         );
       }
    		 
        public void actionPerformed(ActionEvent e) {

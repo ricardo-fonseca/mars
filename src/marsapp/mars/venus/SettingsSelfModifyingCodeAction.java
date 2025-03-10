@@ -1,11 +1,7 @@
-   package mars.venus;
-   import mars.simulator.*;
-   import mars.*;
-   import java.util.*;
-   import java.awt.*;
-   import java.awt.event.*;
-   import javax.swing.*;
-   import java.io.*;
+package mars.venus;
+import mars.*;
+import java.awt.event.*;
+import javax.swing.*;
 	
 	/*
 Copyright (c) 2003-2013,  Pete Sanderson and Kenneth Vollmar
@@ -50,6 +46,16 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          super(name, icon, descrip, mnemonic, accel, gui);
       }
    		 
+      public SettingsSelfModifyingCodeAction(VenusUI gui) {
+         super(
+            "Allow self-modifying code",
+            null,
+            "If set, the MIPS program can write and branch to both text and data segments",
+            null,
+            null,
+            gui
+         );
+      }
        public void actionPerformed(ActionEvent e) {
          Globals.getSettings().setBooleanSetting(Settings.SELF_MODIFYING_CODE_ENABLED,
                ((JCheckBoxMenuItem) e.getSource()).isSelected());

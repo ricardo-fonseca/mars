@@ -1,15 +1,9 @@
-   package mars.venus;
-   import mars.simulator.*;
-   import mars.*;
-   import mars.util.*;
-   import java.util.*;
-   import java.awt.*;
-   import java.awt.event.*;
-   import javax.swing.*;
-   import javax.swing.text.*;
-   import javax.swing.border.*;
-   import javax.swing.event.*;
-   import java.io.*;
+package mars.venus;
+import mars.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.border.*;
 	
 	/*
 Copyright (c) 2003-2009,  Pete Sanderson and Kenneth Vollmar
@@ -111,7 +105,13 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                              Integer mnemonic, KeyStroke accel, VenusUI gui) {
          super(name, icon, descrip, mnemonic, accel, gui);
       }
-   	 
+   	
+      public SettingsHighlightingAction(VenusUI gui) {
+         super("Syntax Highlighting...", null,
+               "Set colors and fonts for highlighting code",
+               null, null, gui);
+      }
+
    	 /**
    	  *  When this action is triggered, launch a dialog to view and modify
    	  *  editor settings.

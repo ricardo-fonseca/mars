@@ -51,6 +51,17 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                              Integer mnemonic, KeyStroke accel, VenusUI gui) {
          super(name, icon, descrip, mnemonic, accel, gui);
       }
+
+      public RunAssembleAction(VenusUI gui) {
+         super(
+            "Assemble",
+            gui.multiResolutionIcon("Assemble"),
+            "Assemble the current file and clear breakpoints",
+            Integer.valueOf(KeyEvent.VK_A),
+            KeyStroke.getKeyStroke( KeyEvent.VK_F3, 0),
+            gui
+         );
+      }
        
    // These are both used by RunResetAction to re-assemble under identical conditions.
        static ArrayList getMIPSprogramsToAssemble() {

@@ -1,9 +1,9 @@
-   package mars.mips.instructions;
-   import mars.*;
-   import mars.util.*;
-   import mars.assembler.*;
-   import mars.mips.hardware.*;
-   import java.util.*;
+package mars.mips.instructions;
+import mars.*;
+import mars.util.*;
+import mars.assembler.*;
+import mars.mips.hardware.*;
+import java.util.*;
 	
 	/*
 Copyright (c) 2003-2008,  Pete Sanderson and Kenneth Vollmar
@@ -45,7 +45,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
     public class ExtendedInstruction extends Instruction {
    
-      private ArrayList translationStrings, compactTranslationStrings;
+      private ArrayList<String> translationStrings, compactTranslationStrings;
     /**
      * Constructor for ExtendedInstruction.
      * 
@@ -119,7 +119,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
      * @return ArrayList of Strings.
      */
     
-       public ArrayList getBasicIntructionTemplateList() {
+       public ArrayList<String> getBasicIntructionTemplateList() {
          return translationStrings;
       }
    
@@ -157,7 +157,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 	  * have a compact alternative.
      */
     
-       public ArrayList getCompactBasicIntructionTemplateList() {
+       public ArrayList<String> getCompactBasicIntructionTemplateList() {
          return compactTranslationStrings;
       }
 		   
@@ -597,11 +597,11 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     // expands to, which is a string, and breaks out into separate
     // instructions.  They are separated by '\n' character.
     
-       private ArrayList buildTranslationList(String translation) {
+       private ArrayList<String> buildTranslationList(String translation) {
          if (translation == null || translation.length() == 0) {
             return null;
          }
-         ArrayList translationList = new ArrayList();
+         ArrayList<String> translationList = new ArrayList<String>();
          StringTokenizer st = new StringTokenizer(translation,"\n");
          while (st.hasMoreTokens()) {
             translationList.add(st.nextToken());
@@ -619,7 +619,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
      * Returns length in bytes of corresponding binary instruction(s).
      * Returns 0 if the ArrayList is null or empty.
      */   
-       private int getInstructionLength(ArrayList translationList) {
+       private int getInstructionLength(ArrayList<String> translationList) {
          if (translationList == null || translationList.size() == 0) {
             return 0;
          }

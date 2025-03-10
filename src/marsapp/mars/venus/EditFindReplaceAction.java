@@ -45,7 +45,18 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                              Integer mnemonic, KeyStroke accel, VenusUI gui) {
          super(name, icon, descrip, mnemonic, accel, gui);
       }
-   		  
+   	
+      public EditFindReplaceAction(VenusUI gui) {
+         super(
+            "Find/Replace",
+            gui.multiResolutionIcon("Find"),
+            "Find/replace text", 
+            Integer.valueOf(KeyEvent.VK_F),
+            KeyStroke.getKeyStroke( KeyEvent.VK_F, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), 
+            gui
+         );
+      }
+
        public void actionPerformed(ActionEvent e){
          findReplaceDialog = new FindReplaceDialog(Globals.getGui(), DIALOG_TITLE, false );
          findReplaceDialog.setVisible(true);

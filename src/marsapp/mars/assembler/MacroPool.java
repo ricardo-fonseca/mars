@@ -1,10 +1,7 @@
-   package mars.assembler;
+package mars.assembler;
 
-   import java.util.ArrayList;
-   import java.util.Stack;
-
-   import mars.ErrorList;
-   import mars.MIPSprogram;
+import mars.MIPSprogram;
+import java.util.ArrayList;
 
 /*
 Copyright (c) 2013.

@@ -3186,7 +3186,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
      *  @param name operator mnemonic (e.g. addi, sw,...)
      *  @return list of corresponding Instruction object(s), or null if not found.
      */
-       public ArrayList matchOperator(String name)
+       public ArrayList<Instruction> matchOperator(String name)
       {
          ArrayList matchingInstructions = null;
         // Linear search for now....
@@ -3195,7 +3195,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             if (((Instruction) instructionList.get(i)).getName().equalsIgnoreCase(name))
             {
                if (matchingInstructions == null) 
-                  matchingInstructions = new ArrayList();
+                  matchingInstructions = new ArrayList<Instruction>();
                matchingInstructions.add(instructionList.get(i));
             }
          }

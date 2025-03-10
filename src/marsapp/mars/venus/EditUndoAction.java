@@ -43,6 +43,20 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          super(name, icon, descrip, mnemonic, accel, gui);
          setEnabled(false);
       }
+      
+      public EditUndoAction(VenusUI gui) {
+         super(
+            "Undo",
+            gui.multiResolutionIcon("Undo"),
+            "Undo last edit", 
+            Integer.valueOf(KeyEvent.VK_U),
+            KeyStroke.getKeyStroke( KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), 
+            gui
+         );
+         setEnabled(false);
+      }
+
+
    	  /**
    	   * Adapted from TextComponentDemo.java in the
    	   * Java Tutorial "Text Component Features"
