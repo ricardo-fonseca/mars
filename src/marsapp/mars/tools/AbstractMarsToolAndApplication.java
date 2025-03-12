@@ -1,15 +1,15 @@
-   package mars.tools;
-   import javax.swing.*;
-   import javax.swing.border.*;
-   import javax.swing.filechooser.FileFilter;
-   import java.awt.*;
-   import java.awt.event.*;
-   import java.util.*;
-   import java.io.*;
-   import mars.*;
-   import mars.util.*;
-   import mars.tools.*;
-   import mars.mips.hardware.*;
+package mars.tools;
+
+import javax.swing.*;
+import javax.swing.border.*;
+import javax.swing.filechooser.FileFilter;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import java.io.*;
+import mars.*;
+import mars.util.*;
+import mars.mips.hardware.*;
 
 /*
 Copyright (c) 2003-2008,  Pete Sanderson and Kenneth Vollmar
@@ -692,14 +692,14 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	 // called when the Assemble and Run button is pressed.  Used only by stand-alone app.
        private class CreateAssembleRunMIPSprogram implements Runnable { 
           public void run() {
-            String noSupportForExceptionHandler = null;  // no auto-loaded exception handlers.
+           // String noSupportForExceptionHandler = null;  // no auto-loaded exception handlers.
            // boolean extendedAssemblerEnabled = true;     // In this context, no reason to constrain.
            // boolean warningsAreErrors = false;           // Ditto.
            
             String exceptionHandler = null;
-            if (Globals.getSettings().getExceptionHandlerEnabled() &&
-                   Globals.getSettings().getExceptionHandler() != null &&
-                   Globals.getSettings().getExceptionHandler().length() > 0) {
+            if (  Globals.getSettings().getBooleanSetting(Settings.EXCEPTION_HANDLER_ENABLED) &&   //getExceptionHandlerEnabled()
+                  Globals.getSettings().getExceptionHandler() != null &&
+                  Globals.getSettings().getExceptionHandler().length() > 0) {
                exceptionHandler = Globals.getSettings().getExceptionHandler();
             }
            
@@ -708,16 +708,16 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             MIPSprogram program = new MIPSprogram();
             mars.Globals.program = program; // Shouldn't have to do this...
             String fileToAssemble = mostRecentlyOpenedFile.getPath();
-            ArrayList filesToAssemble = null;
+            ArrayList<String> filesToAssemble = null;
             if (multiFileAssemble) {// setting (check box in file open dialog) calls for multiple file assembly 
                filesToAssemble = FilenameFinder.getFilenameList(
                                new File(fileToAssemble).getParent(), Globals.fileExtensions);
             } 
             else {
-               filesToAssemble = new ArrayList();
+               filesToAssemble = new ArrayList<String>();
                filesToAssemble.add(fileToAssemble);
             }
-            ArrayList programsToAssemble = null;
+            ArrayList<MIPSprogram> programsToAssemble = null;
             try {
                operationStatusMessages.displayNonTerminatingMessage("Assembling "+fileToAssemble);
                programsToAssemble = program.prepareFilesForAssembly(filesToAssemble, fileToAssemble, exceptionHandler);
@@ -728,7 +728,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                } 
          
             try {
-               program.assemble(programsToAssemble, Globals.getSettings().getExtendedAssemblerEnabled(), Globals.getSettings().getWarningsAreErrors());
+               program.assemble(programsToAssemble, 
+                  Globals.getSettings().getBooleanSetting(Settings.EXTENDED_ASSEMBLER_ENABLED),  // getExtendedAssemblerEnabled()
+                  Globals.getSettings().getBooleanSetting(Settings.WARNINGS_ARE_ERRORS));       // getWarningsAreErrors()  
             }
                 catch (mars.ProcessingException pe) {
                   operationStatusMessages.displayTerminatingMessage("Assembly Error: "+fileToAssemble);

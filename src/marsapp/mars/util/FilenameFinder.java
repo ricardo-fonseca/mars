@@ -187,10 +187,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     * extension null or empty, all files are added.
     * @return array list of matching file names as Strings.  If none, list is empty.
     */
-       public static ArrayList getFilenameList(ClassLoader classLoader,
+       public static ArrayList<String> getFilenameList(ClassLoader classLoader,
                                               String directoryPath, 
-       													 ArrayList fileExtensions  ) {
-         ArrayList filenameList = new ArrayList();
+       													 ArrayList<String> fileExtensions  ) {
+         ArrayList<String> filenameList = new ArrayList<String>();
          String fileExtension;
          if (fileExtensions==null || fileExtensions.size()==0) {
             filenameList = getFilenameList(classLoader,directoryPath,"");
@@ -245,7 +245,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     * extension null or empty, all files are added.
     * @return array list of matching file names (absolute path).  If none, list is empty. 
     */
-       public static ArrayList<String> getFilenameList(String directoryPath, ArrayList fileExtensions) {
+       public static ArrayList<String> getFilenameList(String directoryPath, ArrayList<String> fileExtensions) {
          ArrayList<String> filenameList = new ArrayList<String>();
          String fileExtension;
          if (fileExtensions==null || fileExtensions.size()==0) {
@@ -271,7 +271,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     * If null or empty string, all files are added.  Do NOT include "." in extension.
     * @return array list of matching file names (absolute path).  If none, list is empty. 
     */
-       public static ArrayList<String> getFilenameList(ArrayList nameList, String fileExtension) {
+       public static ArrayList<String> getFilenameList(ArrayList<String> nameList, String fileExtension) {
          fileExtension = checkFileExtension(fileExtension);
          ArrayList<String> filenameList = new ArrayList<String>();
          FileFilter filter = getFileFilter(fileExtension, "", NO_DIRECTORIES);
@@ -296,8 +296,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     * extension null or empty, all files are added.
     * @return array list of matching file names (absolute path).  If none, list is empty. 
     */
-       public static ArrayList getFilenameList(ArrayList nameList, ArrayList fileExtensions) {
-         ArrayList filenameList = new ArrayList();
+       public static ArrayList<String> getFilenameList(ArrayList<String> nameList, ArrayList<String> fileExtensions) {
+         ArrayList<String> filenameList = new ArrayList<String>();
          String fileExtension;
          if (fileExtensions==null || fileExtensions.size()==0) {
             filenameList = getFilenameList(nameList,"");
@@ -336,7 +336,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	 *  @return a FileFilter object that accepts files with given extensions, and directories if so indicated.
    	 */
    	 
-       public static FileFilter getFileFilter(ArrayList extensions, String description, boolean acceptDirectories) {
+       public static FileFilter getFileFilter(ArrayList<String> extensions, String description, boolean acceptDirectories) {
          return new MarsFileFilter(extensions, description, acceptDirectories);
       }
    	 
@@ -348,7 +348,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	 *  @return a FileFilter object that accepts files with given extensions, and directories if so indicated.
    	 */		 
    	 
-       public static FileFilter getFileFilter(ArrayList extensions, String description) {
+       public static FileFilter getFileFilter(ArrayList<String> extensions, String description) {
          return getFileFilter(extensions, description, true);
       }
    	 
@@ -361,7 +361,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	 */
    	 
        public static FileFilter getFileFilter(String extension, String description, boolean acceptDirectories) {
-         ArrayList extensions = new ArrayList();
+         ArrayList<String> extensions = new ArrayList<String>();
          extensions.add(extension);
          return new MarsFileFilter(extensions, description, acceptDirectories);
       }
@@ -375,7 +375,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	 */		 
    	 
        public static FileFilter getFileFilter(String extension, String description) {
-         ArrayList extensions = new ArrayList();
+         ArrayList<String> extensions = new ArrayList<String>();
          extensions.add(extension);
          return getFileFilter(extensions, description, true);
       }
@@ -392,9 +392,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       }    
    	 
    	 // return list of file names in specified folder inside JAR
-       private static ArrayList getListFromJar(String jarName, String directoryPath, String fileExtension) {
+       private static ArrayList<String> getListFromJar(String jarName, String directoryPath, String fileExtension) {
          fileExtension = checkFileExtension(fileExtension);
-         ArrayList nameList = new ArrayList();
+         ArrayList<String> nameList = new ArrayList<String>();
          if (jarName==null) {
             return nameList;
          }
@@ -445,11 +445,11 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	
        private static class MarsFileFilter extends FileFilter {
       
-         private ArrayList extensions;
+         private ArrayList<String> extensions;
          private String fullDescription;
          private boolean acceptDirectories;
         
-          private MarsFileFilter(ArrayList extensions, String description, boolean acceptDirectories) {
+          private MarsFileFilter(ArrayList<String> extensions, String description, boolean acceptDirectories) {
             this.extensions = extensions;
             this.fullDescription = buildFullDescription(description, extensions);
             this.acceptDirectories = acceptDirectories;
@@ -459,7 +459,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       	// We will attach it to description of the extensions.  For example, if the extensions
       	// given are s and asm and the description is "Assembler Programs" the full description
       	// generated here will be "Assembler Programs (*.s; *.asm)"
-          private String buildFullDescription(String description, ArrayList extensions) {
+          private String buildFullDescription(String description, ArrayList<String> extensions) {
             String result = (description == null) ? "" : description;
             if (extensions.size() > 0) {
                result += "  (";

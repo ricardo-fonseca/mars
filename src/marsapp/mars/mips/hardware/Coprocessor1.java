@@ -264,7 +264,6 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	
        public static double getDoubleFromRegisterPair(int reg) 
                                     throws InvalidRegisterAccessException {
-         double result = 0.0;
          if (reg % 2 != 0) {
             throw new InvalidRegisterAccessException();
          } 
@@ -296,7 +295,6 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	
        public static long getLongFromRegisterPair(int reg) 
                                     throws InvalidRegisterAccessException {
-         double result = 0.0;
          if (reg % 2 != 0) {
             throw new InvalidRegisterAccessException();
          } 

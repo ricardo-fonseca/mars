@@ -1,6 +1,5 @@
-   package mars.mips.instructions.syscalls;
-   import java.util.*;
-	import mars.util.*;
+package mars.mips.instructions.syscalls;
+
 /*
 Copyright (c) 2003-2006,  Pete Sanderson and Kenneth Vollmar
 

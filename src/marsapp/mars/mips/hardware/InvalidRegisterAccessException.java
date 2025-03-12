@@ -1,5 +1,4 @@
 package mars.mips.hardware;
-import mars.*;
 
 /*
 Copyright (c) 2003-2006,  Pete Sanderson and Kenneth Vollmar
@@ -38,7 +37,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  **/
 
 public class InvalidRegisterAccessException extends Exception {  
-   private ErrorList errs;
+   // private ErrorList errs;
 
    /**
     * Constructor for IllegalRegisterException.

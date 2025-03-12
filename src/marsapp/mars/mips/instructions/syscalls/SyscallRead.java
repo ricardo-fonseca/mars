@@ -1,8 +1,8 @@
-   package mars.mips.instructions.syscalls;
-   import mars.util.*;
-   import mars.mips.hardware.*;
-   import mars.simulator.*;
-   import mars.*;
+package mars.mips.instructions.syscalls;
+
+import mars.util.*;
+import mars.mips.hardware.*;
+import mars.*;
 
 /*
 Copyright (c) 2003-2009,  Pete Sanderson and Kenneth Vollmar
@@ -55,7 +55,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    */
        public void simulate(ProgramStatement statement) throws ProcessingException {
          int byteAddress = RegisterFile.getValue(5); // destination of characters read from file
-         byte b = 0;
+         // byte b = 0;
          int index = 0;
          byte myBuffer[] = new byte[RegisterFile.getValue(6)]; // specified length
          // Call to SystemIO.xxxx.read(xxx,xxx,xxx)  returns actual length

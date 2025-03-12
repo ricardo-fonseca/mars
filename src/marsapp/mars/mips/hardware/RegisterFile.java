@@ -3,7 +3,8 @@
    import java.util.Observer;
 
    import mars.Globals;
-   import mars.assembler.SymbolTable;
+import mars.Settings;
+import mars.assembler.SymbolTable;
    import mars.mips.instructions.Instruction;
    import mars.util.Binary;
 
@@ -298,7 +299,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          for(int i=0; i< regFile.length; i++){
             regFile[i].resetValue();
          }
-         initializeProgramCounter(Globals .getSettings().getStartAtMain());// replaces "programCounter.resetValue()", DPS 3/3/09
+         initializeProgramCounter(Globals .getSettings().getBooleanSetting(Settings.START_AT_MAIN));   //getStartAtMain());
          hi.resetValue();
          lo.resetValue();
       }

@@ -38,7 +38,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 public class BasicInstruction extends Instruction {
 
-    private String instructionName;
+    // private String instructionName;
     private BasicInstructionFormat instructionFormat;
     private String operationMask;
     private SimulationCode simulationCode;

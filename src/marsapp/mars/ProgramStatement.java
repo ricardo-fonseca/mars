@@ -669,10 +669,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	 
        private class BasicStatementList {
       
-         private ArrayList list;
+         private ArrayList<ListElement> list;
       
           BasicStatementList() {
-            list = new ArrayList();
+            list = new ArrayList<ListElement>();
          }
       
           void addString(String string) {

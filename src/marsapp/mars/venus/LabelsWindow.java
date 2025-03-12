@@ -50,11 +50,11 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       private Container contentPane;
       private JPanel labelPanel;      // holds J
       private JCheckBox dataLabels, textLabels;
-      private ArrayList listOfLabelsForSymbolTable;
+      private ArrayList<LabelsForSymbolTable> listOfLabelsForSymbolTable;
       private LabelsWindow labelsWindow;
       private static final int MAX_DISPLAYED_CHARS = 24;
-      private static final int PREFERRED_NAME_COLUMN_WIDTH = 60;
-      private static final int PREFERRED_ADDRESS_COLUMN_WIDTH = 60;
+      // private static final int PREFERRED_NAME_COLUMN_WIDTH = 60;
+      // private static final int PREFERRED_ADDRESS_COLUMN_WIDTH = 60;
       private static final int LABEL_COLUMN = 0;
       private static final int ADDRESS_COLUMN = 1;
       private static final String[] columnToolTips = {
@@ -165,18 +165,17 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	
    	//
        private JScrollPane generateLabelScrollPane() {
-         listOfLabelsForSymbolTable = new ArrayList();
+         listOfLabelsForSymbolTable = new ArrayList<LabelsForSymbolTable>();
          listOfLabelsForSymbolTable.add(new LabelsForSymbolTable(null));// global symtab
-         ArrayList MIPSprogramsAssembled = RunAssembleAction.getMIPSprogramsToAssemble();
+         ArrayList<MIPSprogram> MIPSprogramsAssembled = RunAssembleAction.getMIPSprogramsToAssemble();
          Box allSymtabTables = Box.createVerticalBox();
          for (int i=0; i<MIPSprogramsAssembled.size(); i++) {
-            listOfLabelsForSymbolTable.add(new LabelsForSymbolTable(
-                        (MIPSprogram) MIPSprogramsAssembled.get(i)));
+            listOfLabelsForSymbolTable.add(new LabelsForSymbolTable( MIPSprogramsAssembled.get(i)));
          }
-         ArrayList tableNames = new ArrayList();
+         ArrayList<Box> tableNames = new ArrayList<Box>();
          JTableHeader tableHeader = null;
          for (int i=0; i<listOfLabelsForSymbolTable.size(); i++) {
-            LabelsForSymbolTable symtab = (LabelsForSymbolTable)listOfLabelsForSymbolTable.get(i);
+            LabelsForSymbolTable symtab = listOfLabelsForSymbolTable.get(i);
             if (symtab.hasSymbols()) {
                String name = symtab.getSymbolTableName();
                if (name.length() > MAX_DISPLAYED_CHARS) {
@@ -291,7 +290,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          private MIPSprogram myMIPSprogram;
          private Object[][] labelData;
          private JTable labelTable;	 
-         private ArrayList symbols;
+         private ArrayList<Symbol> symbols;
          private SymbolTable symbolTable;
          private String tableName;
       	
@@ -332,7 +331,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                symbols = symbolTable.getDataSymbols();
             } 
             else {
-               symbols = new ArrayList();
+               symbols = new ArrayList<Symbol>();
             }
             Collections.sort(symbols, tableSortComparator); // DPS 25 Dec 2008
             labelData = new Object[symbols.size()][2];

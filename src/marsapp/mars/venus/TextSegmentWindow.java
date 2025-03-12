@@ -109,7 +109,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          int addressBase = Globals.getGui().getMainPane().getExecutePane().getAddressDisplayBase();
          codeHighlighting = true;
          breakpointsEnabled = true;
-         ArrayList sourceStatementList = Globals.program.getMachineList();
+         ArrayList<ProgramStatement> sourceStatementList = Globals.program.getMachineList();
          data = new Object[sourceStatementList.size()][columnNames.length];
          intAddresses = new int[data.length];
          addressRows = new Hashtable(data.length);
@@ -266,7 +266,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
        public void updateBasicStatements() {
          if (contentPane.getComponentCount() == 0) 
             return; // ignore if no content to change
-         ArrayList sourceStatementList = Globals.program.getMachineList();
+         ArrayList<ProgramStatement> sourceStatementList = Globals.program.getMachineList();
          for(int i=0; i < sourceStatementList.size(); i++) {
             // Loop has been extended to cover self-modifying code.  If code at this memory location has been
          	// modified at runtime, construct a ProgramStatement from the current address and binary code

@@ -1,13 +1,8 @@
-   package mars.venus;
-   import mars.*;
-   import mars.util.*;
-   import java.util.ArrayList;
-   import java.awt.*;
-   import java.awt.event.*;
-   import javax.swing.*;
-   import javax.swing.filechooser.FileFilter;
-   import java.io.*;
-   import java.beans.*;
+package mars.venus;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 	
 	/*
 Copyright (c) 2003-2008,  Pete Sanderson and Kenneth Vollmar
@@ -42,11 +37,11 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     */   			
     public class FileOpenAction extends GuiAction {
     
-      private File mostRecentlyOpenedFile;
-      private JFileChooser fileChooser;
-      private int fileFilterCount;
-      private ArrayList fileFilterList;
-      private PropertyChangeListener listenForUserAddedFileFilter;
+      // private File mostRecentlyOpenedFile;
+      // private JFileChooser fileChooser;
+      // private int fileFilterCount;
+      // private ArrayList fileFilterList;
+      // private PropertyChangeListener listenForUserAddedFileFilter;
    	 
        public FileOpenAction(String name, Icon icon, String descrip,
                              Integer mnemonic, KeyStroke accel, VenusUI gui) {

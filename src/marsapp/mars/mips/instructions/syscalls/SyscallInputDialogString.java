@@ -1,9 +1,8 @@
-   package mars.mips.instructions.syscalls;
-   import mars.util.*;
-   import mars.mips.hardware.*;
-   import mars.simulator.*;
-   import mars.*;
-   import javax.swing.JOptionPane;
+package mars.mips.instructions.syscalls;
+
+import mars.mips.hardware.*;
+import mars.*;
+import javax.swing.JOptionPane;
 
 /*
 Copyright (c) 2003-2008,  Pete Sanderson and Kenneth Vollmar

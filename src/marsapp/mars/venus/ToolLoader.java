@@ -68,7 +68,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
      */
        public JMenu buildToolsMenu() {
          JMenu menu = null;
-         ArrayList marsToolList = loadMarsTools();
+         ArrayList<MarsToolClassAndInstance> marsToolList = loadMarsTools();
          if (!marsToolList.isEmpty()) {
             menu = new JMenu(TOOLS_MENU_NAME);
             menu.setMnemonic(KeyEvent.VK_T);
@@ -101,9 +101,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     *  as a ZipFile, get the ZipEntry enumeration, find the class files in the tools
     *  folder, then continue as before.
     */
-       private ArrayList loadMarsTools() {
-         ArrayList toolList = new ArrayList();
-         ArrayList candidates = FilenameFinder.getFilenameList(this.getClass( ).getClassLoader(),
+       private ArrayList<MarsToolClassAndInstance> loadMarsTools() {
+         ArrayList<MarsToolClassAndInstance> toolList = new ArrayList<MarsToolClassAndInstance>();
+         ArrayList<String> candidates = FilenameFinder.getFilenameList(this.getClass( ).getClassLoader(),
                                               TOOLS_DIRECTORY_PATH, CLASS_EXTENSION);
       	// Add any tools stored externally, as listed in Config.properties file.
       	// This needs some work, because mars.Globals.getExternalTools() returns

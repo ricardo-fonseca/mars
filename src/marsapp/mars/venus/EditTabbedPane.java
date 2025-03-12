@@ -544,7 +544,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          private File mostRecentlyOpenedFile;
          private JFileChooser fileChooser;
          private int fileFilterCount;
-         private ArrayList fileFilterList;
+         private ArrayList<FileFilter> fileFilterList;
          private PropertyChangeListener listenForUserAddedFileFilter;
          private Editor theEditor;
       
@@ -557,7 +557,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             this.listenForUserAddedFileFilter = new ChoosableFileFilterChangeListener();
             this.fileChooser.addPropertyChangeListener(this.listenForUserAddedFileFilter);
          
-            fileFilterList = new ArrayList();
+            fileFilterList = new ArrayList<FileFilter>();
             fileFilterList.add(fileChooser.getAcceptAllFileFilter());
             fileFilterList.add(FilenameFinder.getFileFilter(Globals.fileExtensions, "Assembler Files", true));
             fileFilterCount = 0; // this will trigger fileChooser file filter load in next line

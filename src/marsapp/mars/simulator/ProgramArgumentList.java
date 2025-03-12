@@ -1,14 +1,10 @@
-   package mars.simulator;
-   import mars.*;
-   import mars.venus.*;
-   import mars.util.*;
-   import mars.mips.hardware.*;
-   import mars.mips.instructions.*;
-   import java.util.*;
-   import javax.swing.*;
-   import java.awt.event.*;
+package mars.simulator;
+
+import mars.*;
+import mars.mips.hardware.*;
+import java.util.*;
 	
-	/*
+/*
 Copyright (c) 2003-2008,  Pete Sanderson and Kenneth Vollmar
 
 Developed by Pete Sanderson (psanderson@otterbein.edu)
@@ -46,7 +42,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
     public class ProgramArgumentList {
    
-      ArrayList programArgumentList;
+      ArrayList<String> programArgumentList;
    
     /**
      *  Constructor that parses string to produce list.  Delimiters
@@ -57,7 +53,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
      */
        public ProgramArgumentList(String args) {
          StringTokenizer st = new StringTokenizer(args);
-         programArgumentList = new ArrayList(st.countTokens());
+         programArgumentList = new ArrayList<String>(st.countTokens());
          while (st.hasMoreTokens()) {
             programArgumentList.add(st.nextToken());
          }
@@ -81,7 +77,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
      *   elements are assumed to contain an argument.
      */	 
        public ProgramArgumentList(String[] list, int startPosition) {
-         programArgumentList = new ArrayList(list.length-startPosition);
+         programArgumentList = new ArrayList<String>(list.length-startPosition);
          for (int i=startPosition; i<list.length; i++) {
             programArgumentList.add(list[i]);
          }
@@ -91,7 +87,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
      *
      *  @param list  ArrayList of String, each element containing one argument
      */
-       public ProgramArgumentList(ArrayList list) {
+       public ProgramArgumentList(ArrayList<String> list) {
          this(list, 0);
       }  
     
@@ -104,12 +100,12 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
      *  @param startPosition Index of array element containing the first argument; all remaining
      *   elements are assumed to contain an argument.
      */	 
-       public ProgramArgumentList(ArrayList list, int startPosition) {
+       public ProgramArgumentList(ArrayList<String> list, int startPosition) {
          if (list == null || list.size() < startPosition) {
-            programArgumentList = new ArrayList(0);
+            programArgumentList = new ArrayList<String>(0);
          } 
          else {
-            programArgumentList = new ArrayList(list.size()-startPosition);
+            programArgumentList = new ArrayList<String>(list.size()-startPosition);
             for (int i=startPosition; i<list.size(); i++) {
                programArgumentList.add(list.get(i));
             }
@@ -187,7 +183,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             
             // Need to set $sp register to stack address, $a0 to argc, $a1 to argv
          	// Need to by-pass the backstepping mechanism so go directly to Register instead of RegisterFile
-            Register[] registers = RegisterFile.getRegisters();
+            //Register[] registers = RegisterFile.getRegisters();
             RegisterFile.getUserRegister("$sp").setValue(stackAddress+Memory.WORD_LENGTH_BYTES);  
             RegisterFile.getUserRegister("$a0").setValue(argStartAddress.length); // argc
             RegisterFile.getUserRegister("$a1").setValue(stackAddress+Memory.WORD_LENGTH_BYTES+Memory.WORD_LENGTH_BYTES); // argv

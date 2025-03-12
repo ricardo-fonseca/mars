@@ -1,6 +1,5 @@
-   package mars.mips.hardware;
-   import mars.*;
-   import java.util.*;
+package mars.mips.hardware;
+import java.util.*;
 
 /*
 Copyright (c) 2003-2006,  Pete Sanderson and Kenneth Vollmar

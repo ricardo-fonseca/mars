@@ -1,12 +1,12 @@
-   package mars.simulator;
-   import mars.*;
-   import mars.venus.*;
-   import mars.util.*;
-   import mars.mips.hardware.*;
-   import mars.mips.instructions.*;
-   import java.util.*;
-   import javax.swing.*;
-   import java.awt.event.*;
+package mars.simulator;
+
+import mars.*;
+import mars.venus.*;
+import mars.util.*;
+import mars.mips.hardware.*;
+import mars.mips.instructions.*;
+import java.util.*;
+import javax.swing.*;
 	
 	/*
 Copyright (c) 2003-2010,  Pete Sanderson and Kenneth Vollmar

@@ -308,12 +308,12 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	
    	 ////////////////////////////////////////////////////////////////////////////
        private JScrollPane createMipsInstructionHelpPane(String instructionClassName) {
-         ArrayList instructionList = Globals.instructionSet.getInstructionList();
-         Vector exampleList = new Vector(instructionList.size());
-         Iterator it = instructionList.iterator();
+         ArrayList<Instruction> instructionList = Globals.instructionSet.getInstructionList();
+         Vector<String> exampleList = new Vector<String>(instructionList.size());
+         Iterator<Instruction> it = instructionList.iterator();
          Instruction instr;
          String blanks = "                        ";  // 24 blanks
-         Class instructionClass;
+         // Class instructionClass;
          while (it.hasNext()) {
             instr = (Instruction) it.next();
             try {

@@ -211,11 +211,11 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    
        public void readSource(String file) throws ProcessingException {
          this.filename = file;
-         this.sourceList = new ArrayList();
+         this.sourceList = new ArrayList<String>();
          ErrorList errors = null;
          BufferedReader inputFile;
          String line;
-         int lengthSoFar = 0;
+         // int lengthSoFar = 0;
          try {
             inputFile = new BufferedReader(new FileReader(file));
             line = inputFile.readLine();
@@ -223,6 +223,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                sourceList.add(line);
                line = inputFile.readLine();
             }
+            inputFile.close();
          } 
              catch (Exception e) {
                errors = new ErrorList();
@@ -292,7 +293,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     * @return ErrorList containing nothing or only warnings (otherwise would have thrown exception).
     **/
    
-       public ErrorList assemble(ArrayList MIPSprogramsToAssemble, boolean extendedAssemblerEnabled)
+       public ErrorList assemble(ArrayList<MIPSprogram> MIPSprogramsToAssemble, boolean extendedAssemblerEnabled)
               throws ProcessingException {   
          return assemble(MIPSprogramsToAssemble, extendedAssemblerEnabled, false);
       }
@@ -309,7 +310,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     * @return ErrorList containing nothing or only warnings (otherwise would have thrown exception).
     **/
     
-       public ErrorList assemble(ArrayList MIPSprogramsToAssemble, boolean extendedAssemblerEnabled,
+       public ErrorList assemble(ArrayList<MIPSprogram> MIPSprogramsToAssemble, boolean extendedAssemblerEnabled,
               boolean warningsAreErrors) throws ProcessingException {
          this.backStepper = null;
          Assembler asm = new Assembler();

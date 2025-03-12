@@ -41,7 +41,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     */
     public class RunAssembleAction extends GuiAction {
    	 
-      private static ArrayList MIPSprogramsToAssemble;
+      private static ArrayList<MIPSprogram> MIPSprogramsToAssemble;
       private static boolean extendedAssemblerEnabled;
       private static boolean warningsAreErrors;
    	// Threshold for adding filename to printed message of files being assembled.
@@ -64,7 +64,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       }
        
    // These are both used by RunResetAction to re-assemble under identical conditions.
-       static ArrayList getMIPSprogramsToAssemble() {
+       static ArrayList<MIPSprogram> getMIPSprogramsToAssemble() {
          return MIPSprogramsToAssemble;
       }
        static boolean getExtendedAssemblerEnabled() {
@@ -88,13 +88,13 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             }
             try{
                Globals.program = new MIPSprogram();
-               ArrayList filesToAssemble;
+               ArrayList<String> filesToAssemble;
                if (Globals.getSettings().getAssembleAllEnabled()) {// setting calls for multiple file assembly 
                   filesToAssemble = FilenameFinder.getFilenameList(
                                new File(FileStatus.getName()).getParent(), Globals.fileExtensions);
                } 
                else {
-                  filesToAssemble = new ArrayList();
+                  filesToAssemble = new ArrayList<String>();
                   filesToAssemble.add(FileStatus.getName());  
                }
                String exceptionHandler = null;
@@ -142,9 +142,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                   mainUI.messagesPane.postMarsMessage(
                              name+": operation completed with errors.\n\n");
                   // Select editor line containing first error, and corresponding error message.
-                  ArrayList errorMessages = pe.errors().getErrorMessages();
+                  ArrayList<ErrorMessage> errorMessages = pe.errors().getErrorMessages();
                   for (int i=0; i<errorMessages.size(); i++) {
-                     ErrorMessage em = (ErrorMessage) errorMessages.get(i);
+                     ErrorMessage em = errorMessages.get(i);
 							// No line or position may mean File Not Found (e.g. exception file). Don't try to open. DPS 3-Oct-2010
 							if (em.getLine()==0 && em.getPosition()==0) {
 							   continue;
@@ -170,11 +170,11 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       
    	// Handy little utility for building comma-separated list of filenames
    	// while not letting line length get out of hand.
-       private String buildFileNameList(String preamble, ArrayList programList) {
+       private String buildFileNameList(String preamble, ArrayList<MIPSprogram> programList) {
          String result = preamble;
          int lineLength = result.length();
          for (int i=0; i<programList.size(); i++) {
-            String filename = ((MIPSprogram)programList.get(i)).getFilename();
+            String filename = programList.get(i).getFilename();
             result += filename + ((i<programList.size()-1)?", ":"");
             lineLength += filename.length();
             if (lineLength > LINE_LENGTH_LIMIT) {

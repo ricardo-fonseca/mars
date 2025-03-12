@@ -10,7 +10,10 @@
    package mars.venus.editors.jeditsyntax.tokenmarker;
 
    import javax.swing.text.Segment;
-   import java.util.*;
+
+import mars.venus.editors.jeditsyntax.PopupHelpItem;
+
+import java.util.*;
 
 /**
  * A token marker that splits lines of text into tokens. Each token carries
@@ -191,7 +194,7 @@
     *  @param tokenText the source String that matched to the token
     *  @return ArrayList containing PopupHelpItem objects, one per match.  
     */
-       public ArrayList getTokenExactMatchHelp(Token token, String tokenText) {
+       public ArrayList<PopupHelpItem> getTokenExactMatchHelp(Token token, String tokenText) {
          return null;
       }
    
@@ -206,7 +209,7 @@
     *  @param tokenText the source String that matched to the token
     *  @return ArrayList containing PopupHelpItem objects, one per match.  
     */		
-       public ArrayList getTokenPrefixMatchHelp(String line, Token tokenList, Token tokenAtOffset, String tokenText) {
+       public ArrayList<PopupHelpItem> getTokenPrefixMatchHelp(String line, Token tokenList, Token tokenAtOffset, String tokenText) {
          return null;
       }
    

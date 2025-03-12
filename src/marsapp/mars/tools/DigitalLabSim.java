@@ -1,18 +1,18 @@
 package mars.tools;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
-
 import javax.swing.*;
-import javax.swing.Timer;
 
 import mars.Globals;
 import mars.mips.hardware.AddressErrorException;
 import mars.mips.hardware.Coprocessor0;
 import mars.mips.hardware.Memory;
 import mars.mips.hardware.MemoryAccessNotice;
-import mars.simulator.Exceptions;
-@SuppressWarnings("serial")
+
+//@SuppressWarnings("serial")
+
 /* Add these two lines in exceptions.java file
  * public static final int EXTERNAL_INTERRUPT_TIMER = 0x00000100; //Add for digital Lab Sim
  * public static final int EXTERNAL_INTERRUPT_HEXA_KEYBOARD = 0x00000200;// Add for digital Lab Sim

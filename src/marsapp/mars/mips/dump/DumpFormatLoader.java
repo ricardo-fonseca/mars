@@ -42,7 +42,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       
       private static final String CLASS_PREFIX = "mars.mips.dump.";
       private static final String DUMP_DIRECTORY_PATH = "mars/mips/dump";
-      private static final String SYSCALL_INTERFACE = "DumpFormat.class";
+      // private static final String SYSCALL_INTERFACE = "DumpFormat.class";
       private static final String CLASS_EXTENSION = "class";
       
       private static ArrayList<Object> formatList = null;
@@ -66,11 +66,11 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                try {
                   // grab the class, make sure it implements DumpFormat, instantiate, add to list
                   String formatClassName = CLASS_PREFIX+file.substring(0, file.indexOf(CLASS_EXTENSION)-1);
-                  Class clas = Class.forName(formatClassName);
+                  Class<?> clas = Class.forName(formatClassName);
                   if (DumpFormat.class.isAssignableFrom(clas) && 
                       !Modifier.isAbstract(clas.getModifiers()) &&
                   	 !Modifier.isInterface(clas.getModifiers())   ) {
-                     formatList.add(clas.newInstance());
+                     formatList.add(clas.getDeclaredConstructor().newInstance());
                   }
                } 
                    catch (Exception e) {

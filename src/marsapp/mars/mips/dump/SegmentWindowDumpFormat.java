@@ -2,7 +2,8 @@
 
    import mars.Globals;
    import mars.ProgramStatement;
-   import mars.util.Binary;
+import mars.Settings;
+import mars.util.Binary;
    import mars.mips.hardware.*;
    import java.io.*;
 /*
@@ -82,11 +83,11 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       
          PrintStream out = new PrintStream(new FileOutputStream(file));
       
-         boolean hexAddresses = Globals.getSettings().getDisplayAddressesInHex();
+         boolean hexAddresses = Globals.getSettings().getBooleanSetting(Settings.DISPLAY_ADDRESSES_IN_HEX); //getDisplayAddressesInHex();
       	
       	// If address in data segment, print in same format as Data Segment Window
          if (Memory.inDataSegment(firstAddress)) {
-            boolean hexValues = Globals.getSettings().getDisplayValuesInHex();
+            boolean hexValues = Globals.getSettings().getBooleanSetting(Settings.DISPLAY_VALUES_IN_HEX); //getDisplayValuesInHex();
             int offset = 0;
             String string="";
             try {
@@ -115,6 +116,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          }
       	
          if (!Memory.inTextSegment(firstAddress)) {
+            out.close(); 
             return;
          }
       	// If address in text segment, print in same format as Text Segment Window

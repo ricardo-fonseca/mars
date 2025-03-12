@@ -1,8 +1,8 @@
-   package mars.mips.instructions.syscalls;
-   import mars.util.*;
-   import mars.mips.hardware.*;
-	import mars.simulator.*;
-   import mars.*;
+package mars.mips.instructions.syscalls;
+
+import mars.util.*;
+import mars.mips.hardware.*;
+import mars.*;
 
 /*
 Copyright (c) 2003-2006,  Pete Sanderson and Kenneth Vollmar

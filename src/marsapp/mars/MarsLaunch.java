@@ -182,7 +182,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             return;
          
          for (int i=0; i<dumpTriples.size(); i++) {
-            String[] triple = (String[])dumpTriples.get(i);
+            String[] triple = dumpTriples.get(i);
             File file = new File(triple[2]);
             Integer[] segInfo = MemoryDump.getSegmentBounds(triple[0]);
          	// If not segment name, see if it is address range instead.  DPS 14-July-2008

@@ -40,7 +40,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     public class MemoryDump {
    
       /** A list of segmentname/dumpformat/filename triples which should be dumped */
-      public static ArrayList dumpTriples = null;
+      public static ArrayList<String[]> dumpTriples = null;
       
       /** A mapping from segments names (like ".text") to the base and limit for that segment. */
       private static final HashMap segmentBoundMap = new HashMap();

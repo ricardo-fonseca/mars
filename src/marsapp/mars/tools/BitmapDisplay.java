@@ -1,12 +1,11 @@
-   package mars.tools;
-   import javax.swing.*;
-   import javax.swing.border.*;
-   import javax.swing.event.*;
-   import java.awt.*;
-   import java.awt.event.*;
-   import java.util.*;
-   import mars.tools.*;
-   import mars.mips.hardware.*;
+package mars.tools;
+
+import javax.swing.*;
+import javax.swing.border.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import mars.mips.hardware.*;
 
 /*
 Copyright (c) 2010-2011,  Pete Sanderson and Kenneth Vollmar

@@ -1,9 +1,9 @@
-   package mars.mips.instructions.syscalls;
-   import mars.util.*;
-   import mars.mips.hardware.*;
-   import mars.simulator.*;
-   import mars.*;
-   import java.util.Random;
+package mars.mips.instructions.syscalls;
+
+import mars.mips.hardware.*;
+import mars.simulator.*;
+import mars.*;
+import java.util.Random;
 
 /*
 Copyright (c) 2003-2008,  Pete Sanderson and Kenneth Vollmar

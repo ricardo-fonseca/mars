@@ -2231,14 +2231,14 @@ public class JEditTextArea extends JComponent
    public String getSyntaxSensitiveToolTipText(int x, int y) {
       String result = null;
       int line = this.yToLine(y);
-      ArrayList matches = getSyntaxSensitiveHelpAtLineOffset(line, this.xToOffset(line,x), true);
+      ArrayList<PopupHelpItem> matches = getSyntaxSensitiveHelpAtLineOffset(line, this.xToOffset(line,x), true);
       if (matches == null) { 
          return null;
       }
       int length = PopupHelpItem.maxExampleLength(matches) + 2;
       result = "<html>";
       for (int i=0; i<matches.size(); i++) {
-         PopupHelpItem match = (PopupHelpItem)matches.get(i);
+         PopupHelpItem match = matches.get(i);
          result += ((i==0)?"":"<br>") + "<tt>" + match.getExamplePaddedToLength(length).replaceAll(" ","&nbsp;") + "</tt>" + match.getDescription();
       }
       return result + "</html>";
@@ -2289,8 +2289,8 @@ public class JEditTextArea extends JComponent
 	// if exact is false.  The former is helpful for mouse-movement-based tool
 	// tips (this is what you have).  The latter is helpful for caret-based tool
 	// tips (this is what you can do).
-   private ArrayList getSyntaxSensitiveHelpAtLineOffset(int line, int offset, boolean exact) {
-      ArrayList matches = null;
+   private ArrayList<PopupHelpItem> getSyntaxSensitiveHelpAtLineOffset(int line, int offset, boolean exact) {
+      ArrayList<PopupHelpItem> matches = null;
       TokenMarker tokenMarker = this.getTokenMarker();
       if (tokenMarker != null) {
          Segment lineSegment = new Segment();
@@ -2347,7 +2347,7 @@ public class JEditTextArea extends JComponent
       int lineStart = getLineStartOffset(line);
       int offset = Math.max(1,Math.min(getLineLength(line),
          getCaretPosition() - lineStart)); 
-      ArrayList helpItems = getSyntaxSensitiveHelpAtLineOffset(line,offset,false);
+      ArrayList<PopupHelpItem> helpItems = getSyntaxSensitiveHelpAtLineOffset(line,offset,false);
       if (helpItems == null && popupMenu != null) {
          popupMenu.setVisible(false);
          popupMenu = null;

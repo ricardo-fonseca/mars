@@ -7,13 +7,15 @@
  * remains intact in all source distributions of this package.
  */
 
-   package mars.venus.editors.jeditsyntax.tokenmarker;
+package mars.venus.editors.jeditsyntax.tokenmarker;
 
-   import mars.venus.editors.jeditsyntax.*;
-   import mars.mips.instructions.*;
-   import mars.assembler.*;
-   import javax.swing.text.Segment;
-   import java.util.*;
+import mars.venus.editors.jeditsyntax.*;
+import mars.mips.instructions.*;
+import mars.Settings;
+import mars.assembler.*;
+import javax.swing.text.Segment;
+import java.util.*;
+
 
 /**
  * MIPS token marker.
@@ -229,17 +231,17 @@
     *  @param tokenText the source String that matched to the token
     *  @return ArrayList of PopupHelpItem objects, one per match.  
     */
-       public ArrayList getTokenExactMatchHelp(Token token, String tokenText) 
+       public ArrayList<PopupHelpItem> getTokenExactMatchHelp(Token token, String tokenText) 
       {  
-         ArrayList matches = null;
+         ArrayList<PopupHelpItem> matches = null;
          if (token != null && token.id == Token.KEYWORD1) {
-            ArrayList instrMatches =  mars.Globals.instructionSet.matchOperator(tokenText);
+            ArrayList<Instruction> instrMatches =  mars.Globals.instructionSet.matchOperator(tokenText);
             if (instrMatches.size() > 0) {
                int realMatches = 0;
-               matches = new ArrayList();
+               matches = new ArrayList<PopupHelpItem>();
                for (int i=0; i<instrMatches.size(); i++) {
                   Instruction inst = (Instruction) instrMatches.get(i);
-                  if (mars.Globals.getSettings().getExtendedAssemblerEnabled() || inst instanceof BasicInstruction) {
+                  if (mars.Globals.getSettings().getBooleanSetting(Settings.EXTENDED_ASSEMBLER_ENABLED) || inst instanceof BasicInstruction) { // getExtendedAssemblerEnabled()
                      matches.add(new PopupHelpItem(tokenText, inst.getExampleFormat(), inst.getDescription()));
                      realMatches++;
                   }
@@ -252,7 +254,7 @@
          if (token != null && token.id == Token.KEYWORD2) {
             Directives dir = Directives.matchDirective(tokenText);
             if (dir != null) {
-               matches = new ArrayList();
+               matches = new ArrayList<PopupHelpItem>();
                matches.add(new PopupHelpItem(tokenText, dir.getName(),dir.getDescription()));
             }
          }
@@ -270,9 +272,9 @@
     *  @return ArrayList of PopupHelpItem objects, one per match.  
     */
     
-       public ArrayList getTokenPrefixMatchHelp(String line, Token tokenList, Token token, String tokenText) 
+       public ArrayList<PopupHelpItem> getTokenPrefixMatchHelp(String line, Token tokenList, Token token, String tokenText) 
       {  
-         ArrayList matches = null;
+         // ArrayList<PopupHelpItem> matches = null;
          
       	// CASE:  Unlikely boundary case...
          if (tokenList == null || tokenList.id == Token.END) {
@@ -384,13 +386,13 @@
       // Return ArrayList of PopupHelpItem for match of directives.  If second argument
    	// true, will do exact match.  If false, will do prefix match.  Returns null
    	// if no matches.
-       private ArrayList getTextFromDirectiveMatch(String tokenText, boolean exact) {
-         ArrayList matches = null;
-         ArrayList directiveMatches = null;
+       private ArrayList<PopupHelpItem> getTextFromDirectiveMatch(String tokenText, boolean exact) {
+         ArrayList<PopupHelpItem> matches = null;
+         ArrayList<Directives> directiveMatches = null;
          if (exact) {
-            Object dir = Directives.matchDirective(tokenText);
+            Directives dir = Directives.matchDirective(tokenText);
             if (dir != null) {
-               directiveMatches = new ArrayList();
+               directiveMatches = new ArrayList<Directives>();
                directiveMatches.add(dir);
             }
          } 
@@ -398,7 +400,7 @@
             directiveMatches =  Directives.prefixMatchDirectives(tokenText);
          }
          if (directiveMatches != null) {
-            matches = new ArrayList();
+            matches = new ArrayList<PopupHelpItem>();
             for (int i=0; i<directiveMatches.size(); i++) {
                Directives direct = (Directives) directiveMatches.get(i);
                matches.add(new PopupHelpItem(tokenText, direct.getName(), direct.getDescription(), exact));
@@ -410,10 +412,10 @@
       // Return text for match of instruction mnemonic.  If second argument true, will
    	// do exact match.  If false, will do prefix match.   Text is returned as ArrayList
    	// of PopupHelpItem objects. If no matches, returns null.
-       private ArrayList getTextFromInstructionMatch(String tokenText, boolean exact) {
-         String text = null;
-         ArrayList matches = null;
-         ArrayList results = new ArrayList();
+       private ArrayList<PopupHelpItem> getTextFromInstructionMatch(String tokenText, boolean exact) {
+         // String text = null;
+         ArrayList<Instruction> matches = null;
+         ArrayList<PopupHelpItem> results = new ArrayList<PopupHelpItem>();
          if (exact) {
             matches =  mars.Globals.instructionSet.matchOperator(tokenText);
          } 
@@ -428,7 +430,7 @@
          TreeSet mnemonics = new TreeSet();
          for (int i=0; i<matches.size(); i++) {
             Instruction inst = (Instruction) matches.get(i);
-            if (mars.Globals.getSettings().getExtendedAssemblerEnabled() || inst instanceof BasicInstruction) {
+            if (mars.Globals.getSettings().getBooleanSetting(Settings.EXTENDED_ASSEMBLER_ENABLED) || inst instanceof BasicInstruction) { // getExtendedAssemblerEnabled()
                if (exact) {
                   results.add(new PopupHelpItem(tokenText, inst.getExampleFormat(), inst.getDescription(), exact));
                } 
@@ -478,12 +480,12 @@
          {
             cKeywords = new KeywordMap(false);
          	// add Instruction mnemonics
-            java.util.ArrayList instructionSet = mars.Globals.instructionSet.getInstructionList();
+            ArrayList<Instruction> instructionSet = mars.Globals.instructionSet.getInstructionList();
             for (int i=0; i< instructionSet.size(); i++) {
                cKeywords.add( ((mars.mips.instructions.Instruction)instructionSet.get(i)).getName(), Token.KEYWORD1 );
             }
          	// add assembler directives
-            java.util.ArrayList directiveSet = mars.assembler.Directives.getDirectiveList();
+            ArrayList<Directives> directiveSet = mars.assembler.Directives.getDirectiveList();
             for (int i=0; i< directiveSet.size(); i++) {
                cKeywords.add( ((mars.assembler.Directives)directiveSet.get(i)).getName(), Token.KEYWORD2 );
             }

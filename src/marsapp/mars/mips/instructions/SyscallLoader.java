@@ -49,7 +49,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       private static final String SYSCALL_ABSTRACT = "AbstractSyscall.class";
       private static final String CLASS_EXTENSION = "class";
       
-      private ArrayList syscallList;
+      private ArrayList<Syscall> syscallList = null;
    	
    /*
       *  Dynamically loads Syscalls into an ArrayList.  This method is adapted from
@@ -58,13 +58,13 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       *  in Java".  Also see the "loadMarsTools()" method from ToolLoader class.
       */
        void loadSyscalls() {
-         syscallList = new ArrayList();
+         syscallList = new ArrayList<Syscall>();
          // grab all class files in the same directory as Syscall
-         ArrayList candidates = FilenameFinder.getFilenameList(this.getClass( ).getClassLoader(),
+         ArrayList<String> candidates = FilenameFinder.getFilenameList(this.getClass( ).getClassLoader(),
                                               SYSCALLS_DIRECTORY_PATH, CLASS_EXTENSION);
 		   HashMap syscalls = new HashMap();
          for( int i = 0; i < candidates.size(); i++) {
-            String file = (String) candidates.get(i); 
+            String file = candidates.get(i); 
 				// Do not add class if already encountered (happens if run in MARS development directory)
 				if (syscalls.containsKey(file)) {
 				  continue;
@@ -76,11 +76,11 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                try {
                   // grab the class, make sure it implements Syscall, instantiate, add to list
                   String syscallClassName = CLASS_PREFIX+file.substring(0, file.indexOf(CLASS_EXTENSION)-1);
-                  Class clas = Class.forName(syscallClassName);
+                  Class<?> clas = Class.forName(syscallClassName);
                   if (!Syscall.class.isAssignableFrom(clas)) {
                      continue;
                   }
-                  Syscall syscall = (Syscall) clas.newInstance();
+                  Syscall syscall = (Syscall) clas.getDeclaredConstructor().newInstance();
                   if (findSyscall(syscall.getNumber()) == null) {
                      syscallList.add(syscall);
                   } 
@@ -102,8 +102,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          
        // Will get any syscall number override specifications from MARS config file and
        // process them.  This will alter syscallList entry for affected names.
-       private ArrayList processSyscallNumberOverrides(ArrayList syscallList) {
-         ArrayList overrides = new Globals().getSyscallOverrides();
+       private ArrayList<Syscall> processSyscallNumberOverrides(ArrayList<Syscall> syscallList) {
+         ArrayList<SyscallNumberOverride> overrides = new Globals().getSyscallOverrides();
          SyscallNumberOverride override;
          Syscall syscall;
          for (int index=0; index < overrides.size(); index++) {
