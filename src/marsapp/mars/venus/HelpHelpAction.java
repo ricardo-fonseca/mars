@@ -53,7 +53,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             UIManager.getIcon( "HelpButton.icon"),
             "Display help information",
             Integer.valueOf(KeyEvent.VK_H),
-            KeyStroke.getKeyStroke(KeyEvent.VK_H, 0), gui);
+            // Couldn't find a way to use 'command + ?' as the accelerator
+            // Apparently you cannot use the '?' character in a KeyStroke
+            KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0),
+            gui);
       }
 
    	// ideally read or computed from config file...
