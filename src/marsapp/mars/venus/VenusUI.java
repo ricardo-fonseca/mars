@@ -249,8 +249,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
      * disabled, etc.
      */
        private void createActionObjects() {
-         Toolkit tk = Toolkit.getDefaultToolkit();
-         Class cs = this.getClass(); 
+         // Toolkit tk = Toolkit.getDefaultToolkit();
+         // Class<? extends VenusUI> cs = this.getClass(); 
          try {
             fileNewAction           = new FileNewAction( mainUI );
             fileOpenAction          = new FileOpenAction(mainUI);
@@ -316,7 +316,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
        private JMenuBar setUpMenuBar() {
       
          Toolkit tk = Toolkit.getDefaultToolkit();
-         Class cs = this.getClass(); 
+         Class<? extends VenusUI> cs = this.getClass(); 
          JMenuBar menuBar = new JMenuBar();
          file=new JMenu("File");
          file.setMnemonic(KeyEvent.VK_F);
@@ -334,11 +334,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          
          // Don't use menu icons or File Exit menu item in Mac OS X
          boolean macOS = new String("Mac OS X").equals( System.getProperty("os.name") );
-         boolean useIcons = true;
-         boolean addFileExit = true;
 
+         boolean addFileExit = true;
          if ( macOS ) {
-            useIcons = false;
             addFileExit = false;
          };
 
@@ -355,7 +353,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          fileDumpMemory = new JMenuItem(fileDumpMemoryAction);
          filePrint = new JMenuItem(filePrintAction);
          fileExit = new JMenuItem(fileExitAction);
-         
+
+         /*
          if ( useIcons ) {
             fileNew.setIcon(new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"New16.png"))));
             fileOpen.setIcon(new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"Open16.png"))));
@@ -379,6 +378,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             filePrint.setIcon(null);
             fileExit.setIcon(null);
          }
+         */
          
          file.add(fileNew);
          file.add(fileOpen);
@@ -410,6 +410,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          editFindReplace = new JMenuItem(editFindReplaceAction);
          editSelectAll = new JMenuItem(editSelectAllAction);
 
+         /*
          if ( useIcons ) {
             editUndo.setIcon(new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"Undo16.png"))));//"Undo16.gif"))));
             editRedo.setIcon(new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"Redo16.png"))));//"Redo16.gif"))));      
@@ -427,6 +428,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             editFindReplace.setIcon(null);
             editSelectAll.setIcon(null);
          }
+            */
 
          edit.add(editUndo);
          edit.add(editRedo);
@@ -448,6 +450,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          runClearBreakpoints = new JMenuItem(runClearBreakpointsAction);
          runToggleBreakpoints = new JMenuItem(runToggleBreakpointsAction);
          
+         /*
          if ( useIcons ) {
             runAssemble.setIcon(new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"Assemble16.png"))));//"MyAssemble16.gif"))));
             runGo.setIcon(new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"Play16.png"))));//"Play16.gif"))));
@@ -469,6 +472,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             runClearBreakpoints.setIcon(null);
             runToggleBreakpoints.setIcon(null);
          }
+            */
 
          run.add(runAssemble);
          run.add(runGo);
@@ -550,6 +554,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
          helpHelp = new JMenuItem(helpHelpAction);
          helpAbout = new JMenuItem(helpAboutAction);
+         /*
          if ( useIcons ) {
             helpHelp.setIcon(new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"Help16.png"))));//"Help16.gif"))));
             helpAbout.setIcon(new ImageIcon(tk.getImage(cs.getResource(Globals.imagesPath+"MyBlank16.gif"))));
@@ -557,6 +562,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             helpHelp.setIcon(null);
             helpAbout.setIcon(null);
          }
+            */
+
          help.add(helpHelp);
          help.addSeparator();
          help.add(helpAbout);

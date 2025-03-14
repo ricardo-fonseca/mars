@@ -88,7 +88,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	*/
    	
        public String getCurrentOpenDirectory() {
-         if ( currentOpenDirectory.isBlank() ) setCurrentOpenDirectory("");
+         if ( currentOpenDirectory.isBlank() ) setCurrentOpenDirectory(mainUI.getRecentPath());
          return currentOpenDirectory;
       }
    
@@ -122,7 +122,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    	
        public String getCurrentSaveDirectory() {
          
-         if ( currentSaveDirectory.isBlank() ) setCurrentSaveDirectory("");
+         if ( currentSaveDirectory.isBlank() ) setCurrentSaveDirectory(mainUI.getRecentPath());
          return currentSaveDirectory;
       }
    
